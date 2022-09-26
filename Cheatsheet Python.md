@@ -403,20 +403,24 @@ Notebook = includes executable code "cellules FR"
 *   Markdown \[m\] \= basic formating info. 
 
 
-<detail>
+<details>
     <summary>## Markdown cheatsheet</summary>
+
     *   \* or \_ italic  \*\* or \_\_ bold ;
+
     *   \# heading1 ## heading2 (and so on)
+
     *   \> >> to indent text (same as <blockquote> )
-    *   \-  (double space) for bullet point, tab to indent
-    *   \`for monospace font\` \`\`\`code as illustration\`\`\`
-    *   $ for in-line math, $$ for separate line 
-    *   ![](Cheatsheet  Python  LP3THW - DataScience_files/Image [3].png)
+
+*   \-  (double space) for bullet point, tab to indent
+*   \`for monospace font\` \`\`\`code as illustration\`\`\`
+*   $ for in-line math, $$ for separate line 
+*   ![](Cheatsheet  Python  LP3THW - DataScience_files/Image [3].png)
 
     See [Reminder Markdown for Jupyter](https://fr.acervolima.com/cellule-markdown-dans-le-bloc-notes-jupyter/)
     [Adam-p's cheatsheet for General Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
     [GitHub Markdown docs](https://docs.github.com/en/get-started/writing-on-github)
-</detail>
+</details>
 
 Module Random
 
