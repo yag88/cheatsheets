@@ -1,6 +1,6 @@
 # Cheatsheet Python3
 ===
-time stamp : 1106
+time stamp : 1112
 Content : 
 
 1.  Python general
@@ -12,13 +12,13 @@ Content :
 
 * * *
 <details>
-    <summary>## 1.  Python general cheatsheet </summary>
+    <summary> ## 1.  Python general cheatsheet </summary>
         
 
     see also 2-pager  [Python3 cheatsheet - perso.limsi.fr](evernote:///view/6367254/s57/e1f90f88-1307-423b-80b8-482d4c4b5825/e1f90f88-1307-423b-80b8-482d4c4b5825/)
 
     <details>
-        <summary>### code formating , I/ O </summary>
+        <summary> ### code formating , I/ O </summary>
 
         indentation = [Landin's](https://en.wikipedia.org/wiki/Peter_Landin) pseudo law: Treat the indentation of your programs as if it determines the meaning of your programs… Because sometimes it does.
 
