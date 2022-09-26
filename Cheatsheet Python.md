@@ -12,13 +12,13 @@ Content :
 
 * * *
 <details>
-<summary> ## 1.  Python general cheatsheet </summary>
+<summary> <h2> 1.  Python general cheatsheet </h2></summary>
     
 
 see also 2-pager  [Python3 cheatsheet - perso.limsi.fr](evernote:///view/6367254/s57/e1f90f88-1307-423b-80b8-482d4c4b5825/e1f90f88-1307-423b-80b8-482d4c4b5825/)
 
 <details>
-<summary> ### code formating , I/ O </summary>
+<summary> <h3>### code formating , I/ O </h3></summary>
 
 indentation = [Landin's](https://en.wikipedia.org/wiki/Peter_Landin) pseudo law: Treat the indentation of your programs as if it determines the meaning of your programs… Because sometimes it does.
 
@@ -375,24 +375,24 @@ from string import ascii\_lowercase
 
   
 
-2.Python for Data Science
+## 2.Python for Data Science
 
-  
-
+<details>  
+<summary> <h3>Dev environment : </h3></summary>
 Link to courses : [DS | Initiez-vous à Python pour l'analyse de données - OpenClassrooms](evernote:///view/6367254/s57/9671058b-017b-483c-b085-27aa9676a0d9/9671058b-017b-483c-b085-27aa9676a0d9/)
 
   
 
-Dev environment : 
+
 
 *   [Anaconda](https://www.anaconda.com/distribution/) : includes Jupyter Notebook. Launch from terminal with jupyter notebook  or (from working dir) jupyter notebook my\_notebook.ipynb
     
 *   [Google Colaboratory](https://colab.research.google.com/?utm_source=scs-index) : full online
     
+</details>
 
-  
-
-Les cellules
+<details>  
+<summary> Les cellules </summary> 
 
 Notebook = includes executable code "cellules FR"
 
@@ -401,7 +401,7 @@ Notebook = includes executable code "cellules FR"
 *    Code \= basic cell // heading = obsolete // Raw = to control document formating when converting
     
 *   Markdown \[m\] \= basic formating info. 
-
+</details>
 
 <details>
     <summary> ## Markdown cheatsheet</summary>
@@ -421,6 +421,7 @@ See [Reminder Markdown for Jupyter](https://fr.acervolima.com/cellule-markdown-d
 [GitHub Markdown docs](https://docs.github.com/en/get-started/writing-on-github)
 </details>
 
+<details>
 Module Random
 
 uses Mersenne Twister to generate random numbers
@@ -463,8 +464,9 @@ fichier .py
 
   
 
-  
+</details>
 
+<details>
 Matplotlib et Seaborn
 
   
@@ -669,8 +671,9 @@ plt.plot(x,y)
 
 sns.distplot(y, kde=True);
 
-  
+</details>
 
+<details>  
 Numpy and its arrays (=matrices)
 
 À chaque fois que vous vous trouvez en train d'utiliser une boucle pour effectuer une opération en Python, demandez-vous si cette opération ne peut pas s'accomplir grâce à Numpy sans boucle.
@@ -782,13 +785,13 @@ myArrayOfBool = myArrayOfInt > 3
 np.sum, np.std, np.argmin np.argmax np.percentile /// pour appliquer sur colonnes / lignes
 
 avec BROADCASTING, on peut faire des opérations, y compris sur des tableaux de taille différente 
-
-  
+</details>
 
   
 
 * * *
 
+<details>
 Pandas 🐼
 
 un DF = des lignes (chacune nommée par un index) et des colonnes. 
@@ -977,6 +980,6 @@ df.describe(exclude=\[np.number\])  # df.describe(percentiles=np.linspace(start 
 
   
 
-  
+</details>
 
 * * *
