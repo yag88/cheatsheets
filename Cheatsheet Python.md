@@ -1,6 +1,20 @@
 # Cheatsheet Python3
+
 ===
+<<<<<<< HEAD
+time stamp : 1112
+Content :
+
+1.  Python general
+2.  Python for data science
+3. Markdown
+    
+
+  
+
+=======
 time stamp : 2209261610
+>>>>>>> 4b4058c15b38e55ad85d79069158c0b09ac8597c
 * * *
 <details>
 <summary> <h2> 1.  Python general cheatsheet </h2></summary>
