@@ -15,328 +15,327 @@ Content :
 
 * * *
 <details>
-  <summary>1.  Python general cheatsheet </summary>
+    <summary>1.  Python general cheatsheet </summary>
+        
+
+    see also 2-pager  [Python3 cheatsheet - perso.limsi.fr](evernote:///view/6367254/s57/e1f90f88-1307-423b-80b8-482d4c4b5825/e1f90f88-1307-423b-80b8-482d4c4b5825/)
+
+    code formating , I/ O 
+
+    indentation = [Landin's](https://en.wikipedia.org/wiki/Peter_Landin) pseudo law: Treat the indentation of your programs as if it determines the meaning of your programs… Because sometimes it does.
+
+    par défaut print retourne à la ligne, sauf si on remplace la variable end: to avoid newline
+
+    print("text", variable, sep = 'texte de separation ', end = ' texte qui remplace new-line ')
+
+    proper format: put space before and after operators.
+
+    an instruction (like a print() ) can exceed one line and finish on the next line (use indentation)
+
+    input("this is a prompt message") # will return a string
+
+    x = int(input("please enter an integer")) # will return ValueError if input is not an int
+
+    There is no difference between input in Python 3 and raw\_input in Python 2 except for the keywords.
+
+    \# this is a comment There is no multi-line comment. 
+
+    '''' This is a [docstring](https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html)  . Using docstring in place of multiline comment is possible but not recommended.
+
+    Operators
+
+    +  - / \* % (mod aka euclidian remainder)  // (euclidian division) \*\* (power, also pow(a, b) ) 
+
+    round(3.14)
+
+    <  >  <=  >=  ==
+
+    (a // b, a % b).
+
     
 
-see also 2-pager  [Python3 cheatsheet - perso.limsi.fr](evernote:///view/6367254/s57/e1f90f88-1307-423b-80b8-482d4c4b5825/e1f90f88-1307-423b-80b8-482d4c4b5825/)
+    Variables
 
-code formating , I/ O 
+    assignation with =  and variable names must start by a letter or by \_ . Letters, numbers, and underscores will work. Use camelCase, long and explicit variable names. 
 
-indentation = [Landin's](https://en.wikipedia.org/wiki/Peter_Landin) pseudo law: Treat the indentation of your programs as if it determines the meaning of your programs… Because sometimes it does.
+    print("texte1 ", variable) = print(f"texte2 {variable}.") = print("texte3 {} ".format(variable))
 
-par défaut print retourne à la ligne, sauf si on remplace la variable end: to avoid newline
+    del myVariable # to remove a (global/local) variable from memory
 
-print("text", variable, sep = 'texte de separation ', end = ' texte qui remplace new-line ')
+    round numbers considered integer, with a decimal 3.0 becomes float.
 
-proper format: put space before and after operators.
+    dynamic casting : existing variable changes type if assigned value of incompatible type.
 
-an instruction (like a print() ) can exceed one line and finish on the next line (use indentation)
+    typecasting = force into a different type. Use the name of the type as typecasting function : 
 
-input("this is a prompt message") # will return a string
+    int() float() str()
 
-x = int(input("please enter an integer")) # will return ValueError if input is not an int
+    interets = int(interets) #converts in place the variable into an integer via dynamic casting
 
-There is no difference between input in Python 3 and raw\_input in Python 2 except for the keywords.
+    type() # to get type of a variable (as a string)
 
-\# this is a comment There is no multi-line comment. 
-
-'''' This is a [docstring](https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html)  . Using docstring in place of multiline comment is possible but not recommended.
-
-Operators
-
- +  - / \* % (mod aka euclidian remainder)  // (euclidian division) \*\* (power, also pow(a, b) ) 
-
-round(3.14)
-
-<  >  <=  >=  ==
-
-(a // b, a % b).
-
-  
-
-Variables
-
-assignation with =  and variable names must start by a letter or by \_ . Letters, numbers, and underscores will work. Use camelCase, long and explicit variable names. 
-
-print("texte1 ", variable) = print(f"texte2 {variable}.") = print("texte3 {} ".format(variable))
-
-del myVariable # to remove a (global/local) variable from memory
-
-round numbers considered integer, with a decimal 3.0 becomes float.
-
-dynamic casting : existing variable changes type if assigned value of incompatible type.
-
-typecasting = force into a different type. Use the name of the type as typecasting function : 
-
-int() float() str()
-
-interets = int(interets) #converts in place the variable into an integer via dynamic casting
-
-type() # to get type of a variable (as a string)
-
-  
-
-from math import sqrt, pi, exp #fonctions de math de base à importer
-
-  
-
-  
-
-Strings
-
-with double quotes or single quotes (either way is acceptable, typically single-quotes for short strings).
-
-the triple-double-quotes allow to type a whole text on several lines, including returns equivalent to \\n.
-
-f-string is a formated string (with a variable inside marked by {}). any string wih {} has a method .format
-
-concatenate with + 
-
-multiply same text 10 time with 'copy '\* 10
-
-single quotes can be included in strings if they use double quotes.
-
-var1 = 2
-
-var2 = "one and two"
-
-text = "text of the message with {} formatted variables, {}"
-
-print(text.format(var1, var2))
-
- in Python any empty list, string, or tuple is [falsy](https://docs.python.org/3/library/stdtypes.html#truth-value-testing)
-
-usefull methods for strings : 
-
-*   upper()  lower()  capitalize() (title(): formating case
-    
-*   replace(old, new)  
-    
-*   find(chaîne) returns -1 (absent) or indice of 1st occurence ;  in true or false;
-    
-*   .startwith(myInitialText) return true or false
     
 
-  
+    from math import sqrt, pi, exp #fonctions de math de base à importer
 
-[list, tuple, set and dict](https://docs.python.org/3/tutorial/datastructures.html)
-
-myList = \[ value 1, value2\]
-
-myDict = {"Georges Dupont": 10000, "Luc Martin": 150, "Lucas Anderson": 300, "Alexandre Petit": 1800.74}
-
-myTuple = (1, 'pomme') # immutable !!
-
-#NB: array is not native Python, but comes from Numpy package/ array module
-
-list = general table, mixes heterogeneous types including list of list, 
-
-    index 0 for first, -1 for last, negative indices cycle back, \[:2\] from 0(first) to 2. 
-
-    lists are ordered, mutable, can contain duplicates & heterogeneous types   
-
-⚠ range returns an immutable sequence type (in Python3), not a list
-
-force a list with : \`\`\`list(range(4))\`\`
-
-dict = access by key instead of index
-
-tuple = immutable list, used to return multiples values in a function. 
-
-Also : 
-
-from enum import Enum #another type of data to chose in a fixed enum
-
-class Strategie(Enum):
-
-    CHANGER = 1
-
-    GARDER = 2
-
-from array import array #another type for math calculation - see Numpy
-
-  
-
-functions for all iterables/iterators: 
-
-*   liste.insert(myindex, myvalue)  ;
-    
-*   .append(myvalue) .extend(my\_other\_list)  to append / concatenate;
-    
-*   r.remove(myvalue)  finds and remove first occurence;
-    
-*   i.index(myvalue)  finds first occurence;
-    
-*   mot clé del(myindex)  // for Dict =  .pop(myKey)
     
 
-del liste\[3\] # \[4, 5, 1, 3\]
-
-len(liste)
-
-a, b = (1, 'pomme') # shorcut to open a tuple
-
-  
-
-Booleans
-
-if not my\_list: print('List is empty!')  # Any empty list, string, or tuple is falsy
-
-*   and ; or ; not() ; \== != < <= >  >= ;
-    
-*   myValue in myString ;
     
 
-  
+    Strings
 
-Command line
+    with double quotes or single quotes (either way is acceptable, typically single-quotes for short strings).
 
-passing argument from the command line with ARGV - first is the script name, second is 
+    the triple-double-quotes allow to type a whole text on several lines, including returns equivalent to \\n.
 
-from sys import argv
+    f-string is a formated string (with a variable inside marked by {}). any string wih {} has a method .format
 
-first, second = ARGV
+    concatenate with + 
 
-  
+    multiply same text 10 time with 'copy '\* 10
 
-Function def .... : 
+    single quotes can be included in strings if they use double quotes.
 
-def print\_two(\*args): #here args is a list
+    var1 = 2
 
-    arg1, arg2 = args
+    var2 = "one and two"
 
-    print(f"arg1: {arg1}, arg2: {arg2}")
+    text = "text of the message with {} formatted variables, {}"
 
-  
+    print(text.format(var1, var2))
 
-def calcul\_IMC(poids = 60, taille = 1.70):
+    in Python any empty list, string, or tuple is [falsy](https://docs.python.org/3/library/stdtypes.html#truth-value-testing)
 
-    imc = poids / taille\*\*2
+    usefull methods for strings : 
 
-    return(imc)
+    *   upper()  lower()  capitalize() (title(): formating case
+        
+    *   replace(old, new)  
+        
+    *   find(chaîne) returns -1 (absent) or indice of 1st occurence ;  in true or false;
+        
+    *   .startwith(myInitialText) return true or false
+        
 
-  
-
-calcul\_IMC(poids = float(input("Quel poids (en kg) ? ")) ,
-
-           taille = float(input("Quelle taille (en metres) ? ")))
-
-Can return multiple values with ; 
-
-    return a, b, c
-
-  
-
-Conditions if ... : ... elif ... : ... else: ...
-
-if len(nom) > 0:
-
-    print("Hello", nom, "!")
-
-**elif** len(nom) <10:
-
-    xxxxx
-
-else:
-
-    print("Hello World !")
-
-True, False
-
-any empty list, string, or tuple is [falsy](https://docs.python.org/3/library/stdtypes.html#truth-value-testing)
-
-No switch statement, [use dict instead](https://www.evernote.com/l/ADkVrRw5rpFGf5C_wuRk_yk7qeaRyAEfIHw/). 
-
-  
-
-Loops
-
-for element in myStringOrMyList:
-
-for i in range(0,nb): #borne droite ouverte !!
-
-for element in range(start,step,endPlusOne):  #shortcut range(1000) = range (0,1,999)
-
-[https://docs.python.org/3/reference/compound\_stmts.html?highlight=while#for](https://docs.python.org/3/reference/compound_stmts.html?highlight=while#for)
-
-while condition :
-
-Interrupt loop with continue (next loop) or break loop
-
-  
-
-modules = classes+variables+functionsDS | librairies Python pour Data Science-2 - Initiez-vous à la librairie Numpyark
-
-module = 1 file with classes+variables+fnctions
-
-library or package  = set of files including an \_\_init\_\_.py
-
-pip #Package Installer for Python
-
-import myModule as myAlias # import the whole module, access via myAlias.myFunction()
-
-import myPackage #access via myPackage.myModule.myFunction()
-
-import myPackage.myModule as myAlias #import only 1 module in the package
-
-from myModule import myVariableOrMyFunction
-
-(ne pas tout importer avec from myModule import \* car risque de conflit)
-
-Main modules/packages : 
-
-*   random => random() ; uniform(a,b) bornes incluses ; randint(a,b) ⚠bornes incluses
     
 
-*   gauss(avg, stdev) pour loi normale ;
+    [list, tuple, set and dict](https://docs.python.org/3/tutorial/datastructures.html)
+
+    myList = \[ value 1, value2\]
+
+    myDict = {"Georges Dupont": 10000, "Luc Martin": 150, "Lucas Anderson": 300, "Alexandre Petit": 1800.74}
+
+    myTuple = (1, 'pomme') # immutable !!
+
+    #NB: array is not native Python, but comes from Numpy package/ array module
+
+    list = general table, mixes heterogeneous types including list of list, 
+
+        index 0 for first, -1 for last, negative indices cycle back, \[:2\] from 0(first) to 2. 
+
+        lists are ordered, mutable, can contain duplicates & heterogeneous types   
+
+    ⚠ range returns an immutable sequence type (in Python3), not a list
+
+    force a list with : \`\`\`list(range(4))\`\`
+
+    dict = access by key instead of index
+
+    tuple = immutable list, used to return multiples values in a function. 
+
+    Also : 
+
+    from enum import Enum #another type of data to chose in a fixed enum
+
+    class Strategie(Enum):
+
+        CHANGER = 1
+
+        GARDER = 2
+
+    from array import array #another type for math calculation - see Numpy
+
     
-*   choice(myList) échantillonage ; choices(myList, k=mySampleSize) échantillon avec remise ; sample(myList, mySampleSize) échantillon sans remise
+
+    functions for all iterables/iterators: 
+
+    *   liste.insert(myindex, myvalue)  ;
+        
+    *   .append(myvalue) .extend(my\_other\_list)  to append / concatenate;
+        
+    *   r.remove(myvalue)  finds and remove first occurence;
+        
+    *   i.index(myvalue)  finds first occurence;
+        
+    *   mot clé del(myindex)  // for Dict =  .pop(myKey)
+        
+
+    del liste\[3\] # \[4, 5, 1, 3\]
+
+    len(liste)
+
+    a, b = (1, 'pomme') # shorcut to open a tuple
+
     
-*   !!! toujours seed() pour véritable aléatoire
+
+    Booleans
+
+    if not my\_list: print('List is empty!')  # Any empty list, string, or tuple is falsy
+
+    *   and ; or ; not() ; \== != < <= >  >= ;
+        
+    *   myValue in myString ;
+        
+
     
 
-*   numpy package => includes random ⚠ dans np, randint(a,b) borne sup exclue !!
+    Command line
+
+    passing argument from the command line with ARGV - first is the script name, second is 
+
+    from sys import argv
+
+    first, second = ARGV
+
     
 
-  
+    Function def .... : 
 
-  
+    def print\_two(\*args): #here args is a list
 
-file access
+        arg1, arg2 = args
 
-mystream = [open](https://docs.python.org/3/library/functions.html#open)(filename) opens a stream
+        print(f"arg1: {arg1}, arg2: {arg2}")
 
-mystream.read()  to look into
+    
 
-close – Closes the file
+    def calcul\_IMC(poids = 60, taille = 1.70):
 
-read – readline Reads the contents of the file (from the stream object returned by open) You can assign the result  to a variable – Reads just one line of a text file.  modifiers to the file modes can I use? The most important one  to
+        imc = poids / taille\*\*2
 
-know for now is the + modifier, so you can do 'w+', 'r+', and 'a+'.
+        return(imc)
 
-truncate – Empties the file. Watch out if you care about the file.
+    
 
-write('stuff') – Writes “stuff” to the file. target.write(line1) target.write("\\n")
+    calcul\_IMC(poids = float(input("Quel poids (en kg) ? ")) ,
 
-[seek](https://docs.python.org/3/library/io.html?highlight=seek#io.IOBase.seek)(0) – Move the read/write location to the beginning of the file.
+            taille = float(input("Quelle taille (en metres) ? ")))
 
-    print(line\_count, f.readline()) print can read a specific line number
+    Can return multiple values with ; 
 
-  
+        return a, b, c
 
-Doc - manual
+    
 
-in python: 
+    Conditions if ... : ... elif ... : ... else: ...
 
-pydoc name\_of\_function
+    if len(nom) > 0:
 
-help(name\_of\_function)
+        print("Hello", nom, "!")
 
-on Windows Powershell: 
+    **elif** len(nom) <10:
 
-python -m pydoc name\_of\_function
+        xxxxx
 
-  </details>
+    else:
+
+        print("Hello World !")
+
+    True, False
+
+    any empty list, string, or tuple is [falsy](https://docs.python.org/3/library/stdtypes.html#truth-value-testing)
+
+    No switch statement, [use dict instead](https://www.evernote.com/l/ADkVrRw5rpFGf5C_wuRk_yk7qeaRyAEfIHw/). 
+
+    
+
+    Loops
+
+    for element in myStringOrMyList:
+
+    for i in range(0,nb): #borne droite ouverte !!
+
+    for element in range(start,step,endPlusOne):  #shortcut range(1000) = range (0,1,999)
+
+    [https://docs.python.org/3/reference/compound\_stmts.html?highlight=while#for](https://docs.python.org/3/reference/compound_stmts.html?highlight=while#for)
+
+    while condition :
+
+    Interrupt loop with continue (next loop) or break loop
+
+    
+
+    modules = classes+variables+functionsDS | librairies Python pour Data Science-2 - Initiez-vous à la librairie Numpyark
+
+    module = 1 file with classes+variables+fnctions
+
+    library or package  = set of files including an \_\_init\_\_.py
+
+    pip #Package Installer for Python
+
+    import myModule as myAlias # import the whole module, access via myAlias.myFunction()
+
+    import myPackage #access via myPackage.myModule.myFunction()
+
+    import myPackage.myModule as myAlias #import only 1 module in the package
+
+    from myModule import myVariableOrMyFunction
+
+    (ne pas tout importer avec from myModule import \* car risque de conflit)
+
+    Main modules/packages : 
+
+    *   random => random() ; uniform(a,b) bornes incluses ; randint(a,b) ⚠bornes incluses
+        
+
+    *   gauss(avg, stdev) pour loi normale ;
+        
+    *   choice(myList) échantillonage ; choices(myList, k=mySampleSize) échantillon avec remise ; sample(myList, mySampleSize) échantillon sans remise
+        
+    *   !!! toujours seed() pour véritable aléatoire
+        
+
+    *   numpy package => includes random ⚠ dans np, randint(a,b) borne sup exclue !!
+        
+
+    
+
+    
+
+    file access
+
+    mystream = [open](https://docs.python.org/3/library/functions.html#open)(filename) opens a stream
+
+    mystream.read()  to look into
+
+    close – Closes the file
+
+    read – readline Reads the contents of the file (from the stream object returned by open) You can assign the result  to a variable – Reads just one line of a text file.  modifiers to the file modes can I use? The most important one  to
+
+    know for now is the + modifier, so you can do 'w+', 'r+', and 'a+'.
+
+    truncate – Empties the file. Watch out if you care about the file.
+
+    write('stuff') – Writes “stuff” to the file. target.write(line1) target.write("\\n")
+
+    [seek](https://docs.python.org/3/library/io.html?highlight=seek#io.IOBase.seek)(0) – Move the read/write location to the beginning of the file.
+
+        print(line\_count, f.readline()) print can read a specific line number
+
+    
+
+    Doc - manual
+
+    in python: 
+
+    pydoc name\_of\_function
+
+    help(name\_of\_function)
+
+    on Windows Powershell: 
+
+    python -m pydoc name\_of\_function
+</details>
 
 * * *
 
@@ -414,27 +413,20 @@ Notebook = includes executable code "cellules FR"
 *   Markdown \[m\] \= basic formating info. 
 
 
-## Markdown cheatsheet
+<detail>
+    <summary>## Markdown cheatsheet</summary>
+    *   \* or \_ italic  \*\* or \_\_ bold ;
+    *   \# heading1 ## heading2 (and so on)
+    *   \> >> to indent text (same as <blockquote> )
+    *   \-  (double space) for bullet point, tab to indent
+    *   \`for monospace font\` \`\`\`code as illustration\`\`\`
+    *   $ for in-line math, $$ for separate line 
+    *   ![](Cheatsheet  Python  LP3THW - DataScience_files/Image [3].png)
 
-
-*   \* or \_ italic  \*\* or \_\_ bold ;
-    
-*   \# heading1 ## heading2 (and so on)
-    
-*   \> >> to indent text (same as <blockquote> )
-    
-*   \-  (double space) for bullet point, tab to indent
-    
-*   \`for monospace font\` \`\`\`code as illustration\`\`\`
-    
-*   $ for in-line math, $$ for separate line 
-    
-*   ![](Cheatsheet  Python  LP3THW - DataScience_files/Image [3].png)
-    
-See [Reminder Markdown for Jupyter](https://fr.acervolima.com/cellule-markdown-dans-le-bloc-notes-jupyter/)
-[Adam-p's cheatsheet for General Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet  )
-[Adam-p's cheatsheet for General Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet  )
-  
+    See [Reminder Markdown for Jupyter](https://fr.acervolima.com/cellule-markdown-dans-le-bloc-notes-jupyter/)
+    [Adam-p's cheatsheet for General Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+    [GitHub Markdown docs](https://docs.github.com/en/get-started/writing-on-github)
+</detail>
 
 Module Random
 
