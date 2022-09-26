@@ -1,16 +1,6 @@
 # Cheatsheet Python3
-<h1> Cheatsheet Python3 </h1>
 ===
-time stamp : 1112
-Content : 
-
-1.  Python general
-2.  Python for data science
-3. Markdown
-    
-
-  
-
+time stamp : 2209261610
 * * *
 <details>
 <summary> <h2> 1.  Python general cheatsheet </h2></summary>
