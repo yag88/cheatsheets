@@ -2,11 +2,10 @@
 
 # Cheatsheet Python3
 ==================
-
+time stamp : 1106
 Content : 
 
 1.  Python general
-    
 2.  Python for data science
 3. Markdown
     
