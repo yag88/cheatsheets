@@ -1,7 +1,5 @@
-* * *
-
 # Cheatsheet Python3
-==================
+===
 time stamp : 1106
 Content : 
 
@@ -14,32 +12,34 @@ Content :
 
 * * *
 <details>
-    <summary>1.  Python general cheatsheet </summary>
+    <summary>## 1.  Python general cheatsheet </summary>
         
 
     see also 2-pager  [Python3 cheatsheet - perso.limsi.fr](evernote:///view/6367254/s57/e1f90f88-1307-423b-80b8-482d4c4b5825/e1f90f88-1307-423b-80b8-482d4c4b5825/)
 
-    code formating , I/ O 
+    <details>
+        <summary>### code formating , I/ O </summary>
 
-    indentation = [Landin's](https://en.wikipedia.org/wiki/Peter_Landin) pseudo law: Treat the indentation of your programs as if it determines the meaning of your programs… Because sometimes it does.
+        indentation = [Landin's](https://en.wikipedia.org/wiki/Peter_Landin) pseudo law: Treat the indentation of your programs as if it determines the meaning of your programs… Because sometimes it does.
 
-    par défaut print retourne à la ligne, sauf si on remplace la variable end: to avoid newline
+        par défaut print retourne à la ligne, sauf si on remplace la variable end: to avoid newline
 
-    print("text", variable, sep = 'texte de separation ', end = ' texte qui remplace new-line ')
+        print("text", variable, sep = 'texte de separation ', end = ' texte qui remplace new-line ')
 
-    proper format: put space before and after operators.
+        proper format: put space before and after operators.
 
-    an instruction (like a print() ) can exceed one line and finish on the next line (use indentation)
+        an instruction (like a print() ) can exceed one line and finish on the next line (use indentation)
 
-    input("this is a prompt message") # will return a string
+        input("this is a prompt message") # will return a string
 
-    x = int(input("please enter an integer")) # will return ValueError if input is not an int
+        x = int(input("please enter an integer")) # will return ValueError if input is not an int
 
-    There is no difference between input in Python 3 and raw\_input in Python 2 except for the keywords.
+        There is no difference between input in Python 3 and raw\_input in Python 2 except for the keywords.
 
-    \# this is a comment There is no multi-line comment. 
+        \# this is a comment There is no multi-line comment. 
 
-    '''' This is a [docstring](https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html)  . Using docstring in place of multiline comment is possible but not recommended.
+        '''' This is a [docstring](https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html)  . Using docstring in place of multiline comment is possible but not recommended.
+    </details>
 
     Operators
 
@@ -334,50 +334,41 @@ Content :
     on Windows Powershell: 
 
     python -m pydoc name\_of\_function
+
+
+    * * *
+
+    
+
+    revuiew Euler023 ; 
+
+    \_\_\_
+
+    
+
+    ![](Cheatsheet  Python  LP3THW - DataScience_files/Image.png)
+
+    
+
+    ![](Cheatsheet  Python  LP3THW - DataScience_files/Image [1].png)
+
+    
+
+    ![](Cheatsheet  Python  LP3THW - DataScience_files/Image [2].png)
+
+
+    
+
+    from string import ascii\_lowercase
+
+    \>>> for c in ascii\_lowercase:
+
+    
+
+    [![mementopython3.odg](Cheatsheet  Python  LP3THW - DataScience_files/6797389174bc11abce43c516411097a4.png)](Cheatsheet  Python  LP3THW - DataScience_files/mementopython3.odg)
+
+  
 </details>
-
-* * *
-
-  
-
-revuiew Euler023 ; 
-
-\_\_\_
-
-  
-
-![](Cheatsheet  Python  LP3THW - DataScience_files/Image.png)
-
-  
-
-![](Cheatsheet  Python  LP3THW - DataScience_files/Image [1].png)
-
-  
-
-![](Cheatsheet  Python  LP3THW - DataScience_files/Image [2].png)
-
-  
-
-  
-
-  
-
-  
-
-* * *
-
-  
-
-from string import ascii\_lowercase
-
-\>>> for c in ascii\_lowercase:
-
-  
-
-[![mementopython3.odg](Cheatsheet  Python  LP3THW - DataScience_files/6797389174bc11abce43c516411097a4.png)](Cheatsheet  Python  LP3THW - DataScience_files/mementopython3.odg)
-
-  
-
 * * *
 
   
