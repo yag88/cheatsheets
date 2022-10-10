@@ -213,9 +213,9 @@ Comment résoudre les erreurs
 * * *
 
 <details>
-<summary> <h2> ReprÃ©senter des variables </h2> </summary>
+<summary> <h2> Representer des variables </h2> </summary>
 
-SupervisÃ© => j'ai dÃ©ja des tag d'apprentissage. On parle de **classement**\= classification supervisÃ©e (en EN = "classification").Â 
+Supervise => j'ai déja des tag d'apprentissage. On parle de **classement**\= classification supervisÃ©e (en EN = "classification").Â 
 
 Non supervisÃ© =Â  **clusteringÂ** 
 
@@ -343,14 +343,13 @@ Date => Format normalisÃ© ISO8601Â 1977-04-22T06:00:00Z.
 
 <details>  
 <summary>
-**Comment centrer reduire :** </summary>
+** Centrer-reduire, training split :** </summary>
 
-import pandas as pd
-
+```import pandas as pd
 import numpy as np
 
 from sklearn.preprocessing import StandardScaler
-
+```
 DÃ©finissons nos donnÃ©es :
 
   
@@ -405,6 +404,13 @@ X\_scaled = pd.DataFrame(X\_scaled)
 
 X\_scaled.describe().round(2)
 
+* Training split*
+
+(https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html)
+`X_train, X_test, y_train, y_test = train_test_split(
+...     X, y, test_size=0.33, random_state=42)`
+Le 42 est un seed du random pour que ce soit toujours le même 
+
 </details>
 
 ***
@@ -430,26 +436,29 @@ X\_scaled.describe().round(2)
             - mais il faut toujours standardiser les variables $X$ pour $σ=1$ avec `sklearn.preprocessing.StandardScaler`
             - chemin de régression : comment évoluent les $β_j$ avec $λ$
 [image](cheminregression.png)
-        - **Lasso = modele parcimonieux (_sparse_)** pour réduire nombre de coeff $β$ = en avoir bcp nuls = 0
+        - **LASSO = modele parcimonieux (_sparse_)** pour réduire nombre de coeff $β$ = en avoir bcp nuls = 0
             - on utilise regularisateur norme1 de $β$
-            - lasso = _Least Absolute Shrinkage and Selection Operator_
+            - LASSO = _Least Absolute Shrinkage and Selection Operator_
             - si plusieurs variables corrélées, le Lasso va en choisir une seule au hazard => modele instable, solution non unique
             - Lasso est un algo de réduction de dimension non supervisé
         - **selection groupée = elastic net** 
-            - consiste à combiner normes 1 et 2 sur beta, avec cette fois 2 hyperparamètres 
-            - => solution moins parcimonnieuse, mais plus stable que Lasso
+            - consiste à combiner normes 1 et 2 sur $β$, avec cette fois 2 hyperparamètres 
+            - => solution moins parcimonnieuse, mais plus stable que LASSO
     - regression logistique = pour classification binaire
         - classification binaire
         - SVM = support vector machine = separatrice a vaste marge
         - Hinge loss = perte charniere
         - 
-    - regression multple classes
+    - regression multiple classes
         - one-versus-rest OVR = One-versus-all = OVA
+- evaluer la qualité d'une prédiction
+        - [`sklearn.metrics.mean_squared_error`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html') pour calculer MSE ou RMSE entre la prédiction et la réalité. (R= root square)\
 
 
 
   
 
 </details-->
+chgt 10oct22 13:37
 
 * * *

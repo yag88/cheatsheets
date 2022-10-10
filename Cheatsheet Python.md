@@ -1,21 +1,7 @@
 # Cheatsheet Python3
 
-===
-<<<<<<< HEAD
-time stamp : 1112
-Content :
-
-1.  Python general
-2.  Python for data science
-3. Markdown
-    
-
-  
-
-=======
-time stamp : 2209261610
->>>>>>> 4b4058c15b38e55ad85d79069158c0b09ac8597c
 * * *
+
 <details>
 <summary> <h2> 1.  Python general cheatsheet </h2></summary>
     
@@ -386,7 +372,17 @@ from string import ascii\_lowercase
 <summary> <h3>Dev environment : </h3></summary>
 Link to courses : [DS | Initiez-vous à Python pour l'analyse de données - OpenClassrooms](evernote:///view/6367254/s57/9671058b-017b-483c-b085-27aa9676a0d9/9671058b-017b-483c-b085-27aa9676a0d9/)
 
-  
+  Main DS Packages : 
+
+\* numpy et scipy pour les calculs
+
+\* Matplotlib et Seaborn pour la visualisation
+
+\* Scikit-learn pour les algorithmes
+
+\* Pandas pour les gérer les données (les charger, appliquer des opérations d'algèbre relationnelle, etc.)
+
+\* Tensorflow et PyTorch pour le deep learning
 
 
 
@@ -427,30 +423,11 @@ See [Reminder Markdown for Jupyter](https://fr.acervolima.com/cellule-markdown-d
 </details>
 
 <details>
-Module Random
+<summary> Module Random </summary>
 
 uses Mersenne Twister to generate random numbers
 
   
-
-Main DS Packages : 
-
-\* numpy et scipy pour les calculs
-
-\* Matplotlib et Seaborn pour la visualisation
-
-\* Scikit-learn pour les algorithmes
-
-\* Pandas pour les gérer les données (les charger, appliquer des opérations d'algèbre relationnelle, etc.)
-
-\* Tensorflow et PyTorch pour le deep learning
-
-  
-
-  
-
-  
-
   
 
 Jupyter
@@ -472,7 +449,7 @@ fichier .py
 </details>
 
 <details>
-Matplotlib et Seaborn
+<summary> Matplotlib et Seaborn </summary>
 
   
 
@@ -679,7 +656,7 @@ sns.distplot(y, kde=True);
 </details>
 
 <details>  
-Numpy and its arrays (=matrices)
+<summary> Numpy and its arrays (=matrices) </summary>
 
 À chaque fois que vous vous trouvez en train d'utiliser une boucle pour effectuer une opération en Python, demandez-vous si cette opération ne peut pas s'accomplir grâce à Numpy sans boucle.
 
@@ -797,7 +774,7 @@ avec BROADCASTING, on peut faire des opérations, y compris sur des tableaux de 
 * * *
 
 <details>
-Pandas 🐼
+<summary> Pandas 🐼 </summary>
 
 un DF = des lignes (chacune nommée par un index) et des colonnes. 
 
@@ -920,19 +897,19 @@ df.PClass.nunique()
   
 
   
+* Se débarasser des NaN :*  
+(rappel : `na` et `null` désignent la même chose en python, pas comme `R`)
+```(python)
+myDF.fillna(value={"age": 0}).age.head(10)
+myDF.dropna().head(10)
+myDF.dropna(axis="columns").head()
+myDF.dropna(subset = ['column_name'])
+myDF.dropna()     #drop all rows that have any NaN values
+myDF.dropna(how='all')     #drop only if ALL columns are NaN
+myDF.dropna(thresh=2)   #Drop row if it does not have at least two values
 
-titanic.fillna(value={"age": 0}).age.head(10)
-
-  
-
-titanic.dropna().head(10)
-
-titanic.dropna(axis="columns").head()
-
-  
-
-titanic.rename(columns={"sex":"sexe"})
-
+myDF.rename(columns={"sex":"sexe"})
+```
 Bon nombre de fonctions Pandas, telles que  dropna  ,  fillna  ,  drop  , etc acceptent un argument  inplace  .
 
   
