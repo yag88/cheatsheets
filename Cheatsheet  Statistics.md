@@ -419,38 +419,59 @@ Le 42 est un seed du random pour que ce soit toujours le même
 
 
 <summary>
-**Modeles prédictifs:** </summary>
-  
-- modeles predictifs linéaires
+<h2>Modeles prédictifs:</h2> </summary>
+
+<details>  
+<summary>
+<h3> Modeles predictifs linéaires = approximations supervisées </h3>
+</summary>
     - Si linéarité+normalité+indépendance (i.i.d.) 
-        - => regression, recherche $β$ qui maximise la vraissemblance ($p(D|β)$) = minimise la somme des carrés des erreurs
+        - => regression, recherche $β$ qui maximise la vraissemblance=  la probabilité de la distribution constatée ($p(D|β)$) = minimise la somme des carrés des erreurs (MSE = RMSE)
         -  `LinearRegression` dans le module `linear_model`.
+            <details> <summary>code</summary> 
+            ```(python)
+             ajouter ici code pandas
+            ``` 
+            </details>
         - $β=(X^⊤X)^{−1}X^⊤y$ 
-        - ... et si $X^TX$ non inversible, utiliser pseudo-inversible
-    - si correlation, ou trop peu d'observation, la matrice des XtX n'est pas inversible => Sur-apprentissage car modele trop complexe
-        - => Alors on minimise une fonction objectif = erreur + complexité - minimum en $β$ du carré des erreurs + λ.régularisateur(β) 
-        - où $λ$ hyperparamètre du poids de la regularisation (cf validation croisée)
-        - **régularisation de Tykhonov = ridge regression** où regulateurs=carré de la norme de $β$ 
+        - ... et si $X^TX$ non inversible (notamment si colonnes corrélées), utiliser pseudo-inversible. Mais le modèle (la signification des $β_i$) est alors moins interprétable...
+    - si correlation, ou trop peu d'observation, la matrice des $X^TX$ n'est pas inversible => Sur-apprentissage car modele trop complexe
+        - => Alors on minimise une fonction objectif = erreur + complexité 
+        = minimum en $β$ du carré des erreurs + λ.régularisateur(β) = $min_{β ∈ \mathbb{R}^{p+1}} (y−Xβ)^⊤(y−Xβ) + λ Regularisateur(β)$
+        - où $λ$ = hyperparamètre du poids de la regularisation (cf validation croisée)
+        - **régularisation de Tykhonov = ridge regression** pour diminuer le poids des coefs
+            - regulateurs=carré de la norme de $β$ = norme $l2$
             - dans `scikit-learn : linear_model.Ridge` et `linear_model.RidgeCV` pour déterminer la valeur optimale du $λ$ par validation croisée.
             - => toujours solution unique explicite $β=(λI+X^⊤X)^{−1}X^⊤y$
-            - mais il faut toujours standardiser les variables $X$ pour $σ=1$ avec `sklearn.preprocessing.StandardScaler`
-            - chemin de régression : comment évoluent les $β_j$ avec $λ$
+            - mais il faut **toujours standardiser** les variables $X$ pour $σ=1$ avec `sklearn.preprocessing.StandardScaler`
+            - chemin de régression : comment évoluent les $β_j$ avec $λ$, avec homogénéisation des coeff pour les variables corrélées entre elles
 [image](cheminregression.png)
         - **LASSO = modele parcimonieux (_sparse_)** pour réduire nombre de coeff $β$ = en avoir bcp nuls = 0
             - on utilise regularisateur norme1 de $β$
             - LASSO = _Least Absolute Shrinkage and Selection Operator_
             - si plusieurs variables corrélées, le Lasso va en choisir une seule au hazard => modele instable, solution non unique
-            - Lasso est un algo de réduction de dimension non supervisé
+            - Lasso est un **algo de réduction de dimension non supervisé** 
         - **selection groupée = elastic net** 
-            - consiste à combiner normes 1 et 2 sur $β$, avec cette fois 2 hyperparamètres 
-            - => solution moins parcimonnieuse, mais plus stable que LASSO
-    - regression logistique = pour classification binaire
-        - classification binaire
-        - SVM = support vector machine = separatrice a vaste marge
-        - Hinge loss = perte charniere
-        - 
-    - regression multiple classes
-        - one-versus-rest OVR = One-versus-all = OVA
+            - consiste à combiner normes 1 et 2 sur $β$, avec cette fois 2 hyperparamètres $λ$ et $α$
+            - $min_{β ∈ \mathbb{R}^{p+1}} (y−Xβ)^⊤(y−Xβ) + λ ((1-α)||β||_1 + α)||β||_2)$
+            - => solution moins parcimonieuse, mais plus stable que LASSO
+</details>
+<h3> Modèles prédictifs pour classification </h3>
+
+- regression logistique = pour classification binaire
+    - classification binaire =  $y$ vaut 0 ou 1.
+    - on on ne prédit plus les valeurs, mais la probabilité $p(y = 1|x)$ composée avec la fonction logistique $u\mapsto {1\over{1+e^{-u}}} $
+    - Pas de solution exacte, calcul numérique par gradient
+    - Pour éviter le sur-apprentissage, régularisation  ℓ2 (par défaut dans `scikit-learn`, 
+    - Pour un modèle parcimonieux, régularisation ℓ1 (dans `scikit-learn`, option`'penalty'=l1`
+- SVM binaire = support vector machine = separatrice a vaste marge
+    - recherche d'un hyperplan séparateur maximisant la marge
+    - risque d'erreur (observations impossibles à séparer par hyperplan, typiquement outliers). On utilise Hinge loss = perte charniere
+    - 
+- SVM multiclasse : regression multiple classes
+    - one-versus-rest OVR = One-versus-all = OVA
+        - on construit k SVM, en cherchant à optimiser
+    - one-versus-one OVO
 - evaluer la qualité d'une prédiction
         - [`sklearn.metrics.mean_squared_error`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html') pour calculer MSE ou RMSE entre la prédiction et la réalité. (R= root square)\
 
@@ -459,6 +480,6 @@ Le 42 est un seed du random pour que ce soit toujours le même
   
 
 </details-->
-chgt 10oct22 13:37
+chgt 11oct22 2021
 
-* * *
+* * * 
