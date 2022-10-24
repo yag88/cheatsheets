@@ -425,14 +425,17 @@ Le 42 est un seed du random pour que ce soit toujours le même
 <summary>
 <h3> Modeles predictifs linéaires = approximations supervisées </h3>
 </summary>
-    - Si linéarité+normalité+indépendance (i.i.d.) 
-        - => regression, recherche $β$ qui maximise la vraissemblance=  la probabilité de la distribution constatée ($p(D|β)$) = minimise la somme des carrés des erreurs (MSE = RMSE)
+
+- Si linéarité+normalité+indépendance (i.i.d.) 
+    - => regression, recherche $β$ qui maximise la vraissemblance=  la probabilité de la distribution constatée ($p(D|β)$) = minimise la somme des carrés des erreurs (MSE = RMSE)
         -  `LinearRegression` dans le module `linear_model`.
-            <details> <summary>code</summary> 
+    
+    <details> <summary>code</summary> 
             ```(python)
              ajouter ici code pandas
             ``` 
-            </details>
+    </details>
+
         - $β=(X^⊤X)^{−1}X^⊤y$ 
         - ... et si $X^TX$ non inversible (notamment si colonnes corrélées), utiliser pseudo-inversible. Mais le modèle (la signification des $β_i$) est alors moins interprétable...
     - si correlation, ou trop peu d'observation, la matrice des $X^TX$ n'est pas inversible => Sur-apprentissage car modele trop complexe
