@@ -423,11 +423,11 @@ Le 42 est un seed du random pour que ce soit toujours le même
 
 <details>  
 <summary>
-<h3> Modeles predictifs linéaires = approximations supervisées </h3>
+<h3> M.1 Modeles predictifs linéaires = approximations supervisées </h3>
 </summary>
 
-- Si linéarité+normalité+indépendance (i.i.d.) 
-    - => regression, recherche $β$ qui maximise la vraissemblance=  la probabilité de la distribution constatée ($p(D|β)$) = minimise la somme des carrés des erreurs (MSE = RMSE)
+- Si linéarité+normalité+indépendance (i.i.d.) => regression
+    - recherche $β$ qui maximise la vraissemblance=  la probabilité de la distribution constatée ( $p(D|β)$ ) = minimise la somme des carrés des erreurs (MSE = RMSE)
         -  `LinearRegression` dans le module `linear_model`.
     
     <details> <summary>code</summary> 
@@ -459,7 +459,8 @@ Le 42 est un seed du random pour que ce soit toujours le même
             - $min_{β ∈ \mathbb{R}^{p+1}} (y−Xβ)^⊤(y−Xβ) + λ ((1-α)||β||_1 + α)||β||_2)$
             - => solution moins parcimonieuse, mais plus stable que LASSO
 </details>
-<h3> Modèles prédictifs pour classification </h3>
+<details>
+<summary> <h3> M.2 Modèles prédictifs linéaires pour classification </h3> </summary>
 
 - regression logistique = pour classification binaire
     - classification binaire =  $y$ vaut 0 ou 1.
@@ -477,12 +478,140 @@ Le 42 est un seed du random pour que ce soit toujours le même
     - one-versus-one OVO
 - evaluer la qualité d'une prédiction
         - [`sklearn.metrics.mean_squared_error`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html') pour calculer MSE ou RMSE entre la prédiction et la réalité. (R= root square)\
+</details>
+
+<details>
+<summary> <h3> M.3 Modèles prédictifs non linéaires </h3> </summary>
+- "Kernel trick" : transformer les x d'input des 
+![image](https://user-images.githubusercontent.com/7408762/197527731-29e2ad2b-2a1e-48a7-b92c-26df55445280.png)
+
+- Neural networks : fonction d'activation sur entrées. "Perceptron"
+    - Le Perceptron = "neurone" : 
+        - Combi linéaire des entrées x activation
+        - poids appris par descende de gradient
+    - Empiler les perceptrons : 
+        - poids sur chaque perceptron
+        - à entrainer avec EN back-propagation (FR rétro-propagation) : $derreur/dw_hji= d/d * d/d * d/d$
+
+    - Pour approximation
+        - technique de descente du gradient
+        - entropie croisée 
+    - Pour classification
+        - possible d'utiliser activation à seuil
+        - mieux : utiliser sigmoide (typiquement : activation logistique) pour probabilité d'appartenance à une classe 
+    - Limitation : les réseaux de neurones ne sont pas la solution à tous les problèmes car...
+        
+</details>
 
 
+<details>
+<summary> <h3> M.4 Modèles ensemblistes </h3> </summary>
 
-  
+- Gist = combine several models together
+    - "Bootstrap" first idea = sampling with remise échantillonage avec remise
+    - Méthodes parallèles: train several models simultaneously, recombine them at the end
+    - utilisant des "apprenants faibles" : des méthodes simples et peu efficaces, qui en se combinant donnent de meilleurs résultat que les méthodes complexes
+    - Méthodes séquentielles : **boosting**
 
-</details-->
+<details>
+<summary>
+- **Bagging** = Bootstrap aggregation </summary>
+    - Moyenne pour prédiction, vote majoritaire pour classification
+    - 
+```(python)
+from sklearn.datasets import make_moons
+X, y = make_moons(n_samples=100, noise=0.25)
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y)
+
+from sklearn.ensemble import BaggingClassifier 
+
+bagging = BaggingClassifier(n_estimators=5)
+bagging.fit(X_train, y_train)
+from mglearn.plot_interactive_tree import plot_tree_partition
+from mglearn.plot_2d_separator import plot_2d_separator
+from mglearn.tools import discrete_scatter
+
+fig, axes = plt.subplots(2, 3, figsize=(20, 10))
+for i, (ax, tree) in enumerate(zip(axes.ravel(), bagging.estimators_)):
+    ax.set_title("Tree {}".format(i))
+    plot_tree_partition(X_train, y_train, tree, ax=ax)
+plot_2d_separator(bagging, X_train, fill=True, ax=axes[-1, -1],
+                                    alpha=.4)
+axes[-1, -1].set_title("Bagging")
+discrete_scatter(X_train[:, 0], X_train[:, 1], y_train)
+```
+
+</details>
+
+<details>
+<summary>
+- **Random Forest** = arbres de décisions binaires combinés  la majorité de vote
+</summary>
+    - Pb: les arbres de décision ont tendance à overfitter. 
+    - Pour faire grandir chaque noeud, on n'utilise qu'un sous-ensemble de features (et pas toutes comme le bagging).
+        - sous ensemble choisi de manière aléatoire : arbres aléatoires
+    - Avantage  : complexité peu élevés, on a estimation de l'importance des features. Pas d'overfitting, peu de mémoire utilisée. 
+ ```(python)   
+import pandas as pd
+
+train = pd.read_csv("train.csv")
+test  = pd.read_csv("test.csv")
+print(train.shape)
+train.isna().sum()
+train = train.loc[train.Activity.notna()]
+train = train.fillna(train.median(), inplace=True)
+
+X_train = train[train.columns[:-2]]
+y_train = train['Activity']
+
+X_test = test[test.columns[:-2]]
+y_test = test['Activity']
+
+from sklearn.ensemble import RandomForestClassifier
+
+rfc = RandomForestClassifier(n_estimators=500, oob_score=True)
+model = rfc.fit(X_train, y_train)
+from sklearn.metrics import accuracy_score
+
+pred = rfc.predict(X_test)
+print("accuracy {:.2f}".format(accuracy_score(y_test, pred)))
+from sklearn.feature_selection import SelectFromModel
+select = SelectFromModel(rfc, prefit=True, threshold=0.003)
+X_train2 = select.transform(X_train)
+print(X_train2.shape)
+import timeit
+
+rfc2 = RandomForestClassifier(n_estimators=500, oob_score=True)
+
+start_time = timeit.default_timer()
+
+rfc2 = rfc2.fit(X_train2, y_train)
+
+X_test2 = select.transform(X_test)
+
+pred = rfc2.predict(X_test2)
+elapsed = timeit.default_timer() - start_time
+accuracy = accuracy_score(y_test, pred)
+
+print("accuracy {:.2f} time {:.2f}s".format(accuracy, elapsed))
+
+```
+
+</details>
+
+<details>
+<summary> Boosting & Gradient Boosting </summary>
+
+- Le Boosting, dont adaboost
+    - on pondere chacun des points à chaque generation
+
+- Gradient de Boosting : 
+    - 
+    
+</details>
+</details>
+
 chgt 11oct22 2021
 
 * * * 
