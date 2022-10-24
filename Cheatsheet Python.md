@@ -369,31 +369,29 @@ from string import ascii\_lowercase
 ## 2.Python for Data Science
 
 <details>  
-<summary> <h3>Dev environment : </h3></summary>
-Link to courses : [DS | Initiez-vous à Python pour l'analyse de données - OpenClassrooms](evernote:///view/6367254/s57/9671058b-017b-483c-b085-27aa9676a0d9/9671058b-017b-483c-b085-27aa9676a0d9/)
+<summary> <h3> 2.1. Environnement Dev & packages à connaitres </h3> </summary>
+* Link to courses : [DS | Initiez-vous à Python pour l'analyse de données - OpenClassrooms](evernote:///view/6367254/s57/9671058b-017b-483c-b085-27aa9676a0d9/9671058b-017b-483c-b085-27aa9676a0d9/)
 
-  Main DS Packages : 
+* numpy et scipy pour les calculs (numpy => arrays)
 
-\* numpy et scipy pour les calculs
+* Matplotlib et Seaborn pour la visualisation. (Seaborn étant une surcouche de MatPlotLib)
 
-\* Matplotlib et Seaborn pour la visualisation
+* Scikit-learn pour les algorithmes
 
-\* Scikit-learn pour les algorithmes
+* Pandas pour les gérer les données (les charger, appliquer des opérations d'algèbre relationnelle, etc.)
 
-\* Pandas pour les gérer les données (les charger, appliquer des opérations d'algèbre relationnelle, etc.)
-
-\* Tensorflow et PyTorch pour le deep learning
-
-
+* Tensorflow et PyTorch pour le deep learning
 
 *   [Anaconda](https://www.anaconda.com/distribution/) : includes Jupyter Notebook. Launch from terminal with jupyter notebook  or (from working dir) jupyter notebook my\_notebook.ipynb
     
 *   [Google Colaboratory](https://colab.research.google.com/?utm_source=scs-index) : full online
+
+* il existe d'autres environnements, non essayer (e.g. JupyterLab)
     
 </details>
 
 <details>  
-<summary> Les cellules </summary> 
+<summary> <h3> 2.2.Jupyter Notebook & Colab - cellules </h3></summary> 
 
 Notebook = includes executable code "cellules FR"
 
@@ -402,10 +400,23 @@ Notebook = includes executable code "cellules FR"
 *    Code \= basic cell // heading = obsolete // Raw = to control document formating when converting
     
 *   Markdown \[m\] \= basic formating info. 
+
+* Mise en forme des outputs de cellules : [Jupyter](https://jupyterbook.org/en/stable/content/code-outputs.html) ; [Jupyter2 MyST](https://jupyterbook.org/en/stable/reference/cheatsheet.html#myst-cheatsheet-code-cell-tags) ; formatting in Colab [relies on Jupyter, may or may not work](https://colab.research.google.com/notebooks/snippets/advanced_outputs.ipynb) 
+
+* Jupyter shortcuts : 
+    * Executer code = Ctrl + Ent or 
+    * Alt + Ent (run + open new cell)-
+    * open new code cell = Shit+Ent.
+    * Créer un script pour partager des variables ou des fonctions sur plusieurs notebook: fichier .py
+    * Temps de travail : 
+`%timeit myFunction(myArgs) #renvoit le temps de travail d'une fonction`
+
+
 </details>
 
 <details>
-    <summary> ## Markdown cheatsheet</summary>
+<summary> <h3> 2.3. Markdown cheatsheet </h3></summary> 
+
 
 *   \* or \_ italic  \*\* or \_\_ bold ;
 *   \# heading1 ## heading2 (and so on)
@@ -423,35 +434,324 @@ See [Reminder Markdown for Jupyter](https://fr.acervolima.com/cellule-markdown-d
 </details>
 
 <details>
-<summary> Module Random </summary>
+<summary> <h3> 2.4. Module Random  </h3></summary> 
 
-uses Mersenne Twister to generate random numbers
+* uses Mersenne Twister to generate random numbers
+
+
+</details>
+
+
+
+<details> 
+<summary> <h3> 2.5. Numpy and its arrays (=matrices)  </h3></summary>
+
+À chaque fois que vous vous trouvez en train d'utiliser une boucle pour effectuer une opération en Python, demandez-vous si cette opération ne peut pas s'accomplir grâce à Numpy sans boucle.
+
+arrayarrays have same type (unlike lists)
+
+import numpy as np _#alternative : import array as arr_
+
+array\_of\_int = arr.array("i", \[3, 6, 9, 12\]) #array module requires same type (here "i" means integer)
+
+array\_heterog = np.array(\["numbers", 3, 6, 9, 12\])
+
+array = must be declared (created), are more efficient than lists for data storage, can handle math operations
+
+    index 0 for first, -1 for last, negative indices cycle back, \[:2\] from 0(first) to 2(excluded). 
+
+⚠ vecteurs numpy sont (200,) au lieu de (200,1). Cela permet de les voir soit comme ligne, soit comme colonne. Mais parfois il faut tout de même les \`\`\`reshape\`\`\` . 
+
+Création d'un array Numpy: 
 
   
-  
 
-Jupyter
+np.array(myList) # force la conversion le cas échéant, crée des array 1xn ou nxp (avec liste de listes)
 
-Executer code = Ctrl + Ent - open new code cell = Shit+Ent.
-
-  
-
-Créer un script pour partager des variables ou des fonctions sur plusieurs notebook: 
-
-fichier .py
-
-%timeit myFunction(myArgs) #renvoit le temps de travail d'une fonction
+np.array(myList, dtype = "float32")
 
   
+
+Les tableaux remplis : 
+
+np.zeros(10, dtype = int) #tableau 1x10
+
+np.ones((3,50), dtype = float)
+
+np.full((4,4), 3.14)
+
+np.eye(3) #la matrice identité
+
+np.linspace(start= 0 , stop = 1, num = 11)  #un sequence espacée linéairement avec num poteau (num-1 intervalles)
+
+np.arange(start= 0 , stop = 1, step = 0.1) #une autre séquence, presque comme linspace (mais n'inclut par la borne sup)
+
+np.random.rand(3,5) #une matrice aléatoire 3x5 - aussi avec random.random et random.normal
+
+  
+
+myArray.shape #renvoie une liste de 2 élements \[lignes,colonnes\]
+
+numpy.shape -> tuple with size of table .reshape -> change size
+
+  
+
+  
+
+Connaitre le tableau : 
+
+myArray.ndim #nb de dimensions
+
+myArray.shape
+
+myArray.size #nombre total éléments = n x p
+
+myArray.dtype
+
+  
+
+myArray\[1,3:14:2\] #slicing = start:end:step => 3 to 14 by a step of 2
+
+myArray\[::-1\] #reverse of array
+
+myTable\[1,:\] #la première ligne
+
+Manipulations de matrices : 
+
+np.sum(myMatrix,axis = 0) # 0 sum des lignes, 1 sommes des colonnes, pas d'axis -> somme totale
+
+np.mean(myArray)
+
+np.var(myArray) #variance
+
+np.argmin(myArray) #index du min
+
+np.percentile(....) ??
+
+  
+
+np.concatenate(myTable1, myTable2) # use rather np.vstack(myListOfArrays) and np.hstack(myListOfArrays)
+
+np.where(myArrays > 3) #renvoit un extrait - quel type et taille ????
+
+no.newaxis ?!?!?
+
+b = np.arange(3)\[:, np.newaxis\] #cf cours python pour DS3-2.1
+
+  
+
+LA PUISSANCE DE NUMPY, c'est de parcourir des tableaux SANS BOUCLE for: 
+
+\+ - \* / // #division entiere arrondie
+
+np.abs(myArray)
+
+np.exp(myArray) # log, etc.
+
+myArrayOfBool = myArrayOfInt > 3
+
+  
+
+np.sum, np.std, np.argmin np.argmax np.percentile /// pour appliquer sur colonnes / lignes
+
+avec BROADCASTING, on peut faire des opérations, y compris sur des tableaux de taille différente 
+</details>
+
+  
+
+* * *
+
+<!--details-->
+<summary> <h3> 2.6. Pandas 🐼  </h3></summary>
+
+* fundamental [data structures](https://pandas.pydata.org/pandas-docs/stable/user_guide/10min.html) = DF + Series : 
+    * `pandas.DataFrame` = 2-dimensional, labeled structure, with 1 type per column.
+        * Rows have an index, columns have names . 
+       	* DF equivalent to spreadsheet = SQL table = dict of Series = 2-D ndarray = structured 1-D ndarray 
+
+    * `pandas.Series` => objet colonne, like a dict or a ndarray
+        * création `mySeries = pd.Series(data, index=index, name="myName")` où data est un dict (pas besoin d'index), an n-dimensional (numpy) array avec index optionel , ou un scalar avec index obligatoire. Index = list of labels. Name = column heading
+        * Pour obtenir colonne numpy à partir de Series, methode `.values` ou `mySeries.to_numpy()` ou `mySeries.array`
+        * `panda.Series` behave a lot like `numpy.ndarray`
+
+
+* Pour regarder dans un DF: 
+```(python)
+df = pd.read\_csv("../Dataset/Titanic.csv")
+
+pd.DataFrame(famille\_panda\_numpy, index = \['maman', 'bebe', 'papa'\], columns = \['pattes', 'poil', 'queue', 'ventre'\])
+
+population = pd.Series(population\_dict) #une Série (colonne) se construit a partir d'un dict (avec key -> index), ou d'une Liste de valeur avec une liste index (par défaut, index = 0,1,2...)
+
+df.head(2)
+
+df.shape #returns tuple
+
+df.info() # aussi dtypes (list Names and their types) and describe
+
+len(myDF)
+
+titanic.describe(include="all")  # (from np) donne des stats (count, mean, std, ... not median)
+```
+  
+* Basic manipulation of DF / Series
+```(python)
+
+  
+
+  
+
+df.columns  # df.columns.difference(\[''\]) remet les colomnes par ordre alphabe'tique (pourquoi ?!?)
+
+  
+
+myDF\["Ventre"\] myDF.Ventre  # 3 methodes pour extraire unes colonne (objet pandas.Series )
+
+myDF.iloc\[:,0\] # afficher la première colonne
+
+myDF\[\['myColumn1', 'myColumn2'\]\] # attention liste de noms de colonnes
+
+famille\_panda\_df.iloc\[2\] # pour les lignes / index 
+
+famille\_panda\_df.loc\["papa"\] #loc avec les noms, iloc avec les no d'indices
+
+df.loc\[:, \['PClass','Name'\]\]
+
+\---- a bit smarter
+
+mydf.columns.difference(\['Age','SexCode'\]) # afficher toutes les colonnes sauf ... 
+
+\# la méthode columns.difference remet les colonnes par ordre alphabetique (?!?!) 
+
+  
+
+mydf.drop\_duplicates() # voir aussi unique pour la liste
+
+  
+
+#To print, change display options with pandas.set\_options() and pandas.get\_options()
+
+pandas.set\_option('display.max\_rows', None)
+
+On supprime la première colonne inutile
+
+  
+
+df.drop(\['Unnamed: 0'\], axis=1, inplace=True)
+
+  
+
+myDF.append(myOtherDF)
+```
+
+  
+
+On manipule un DF: 
+
+for ind\_ligne, contenu\_ligne in famille\_panda\_df.iterrows(): #envoie (à chaque itération de la boucle for) un tuple dont le premier élément est l'index de la ligne, et le second le contenu de la ligne en question 
+
+  
+
+masque = famille\_panda\_df\["ventre"\] == 80 #renvoi une série de booléens, qui peut servir de masque
+
+df\[df.PClass != "1st"\]  # autre exemple de masque
+
+~ df.PClass.isin(\['1st', '2nd'\]) # autre exemple de masque - le ~ est une negation
+
+myDF\[myDF.PClass.isna()\] # also .notna()
+
+  
+
+famille\_panda\_df\[~masque\] #inversion du masque
+
+\# ======= SORTING ==========
+
+df.Age.sort\_values(ascending=False) # default ascending=True
+
+df.sort\_values(by = \['PClass','Age'\], ascending=\[True,False\]) 
+
+  
+
+  
+
+\# ======== UNIQUE VALUES =======
+
+df.PClass.unique()  # renvoie la liste 
+
+df.PClass.nunique()
+
+  
+
+  
+* Se débarasser des NaN :*  
+(rappel : `na` et `null` désignent la même chose en python, pas comme `R`)
+```(python)
+myDF.fillna(value={"age": 0}).age.head(10)
+myDF.dropna().head(10)
+myDF.dropna(axis="columns").head()
+myDF.dropna(subset = ['column_name'])
+myDF.dropna()     #drop all rows that have any NaN values
+myDF.dropna(how='all')     #drop only if ALL columns are NaN
+myDF.dropna(thresh=2)   #Drop row if it does not have at least two values
+
+myDF.rename(columns={"sex":"sexe"})
+```
+Bon nombre de fonctions Pandas, telles que  dropna  ,  fillna  ,  drop  , etc acceptent un argument  inplace  .
+
+  
+
+titanic.pivot\_table('survived', index='sex', columns='class', aggfunc="sum")
+
+  
+
+Projection = sélection de colonnes
+
+Restriction = sélection de lignes
+
+Union = vstack des lignes 
+
+Jointure = pd.merge
+
+pd.concat(myDF1, myDF2) #par défaut vstack, se change avec arg axis =1
+
+!!! la concatenation concserve les index => utiliser des index hierarchiques
+
+  
+
+df3 = pd.merge(df1, df2, left\_on= "employee", right\_on= "emp\_name")
+
+  
+
+  
+
+Stats on DF : 
+
+  
+
+import numpy as np
+
+  
+
+myDF.Age.mean()  # also median() max() min() std() var() 
+
+df.Age.quantile(\[.1, .5\]) #calculates the quantiles in the list
+
+df.Age.quantile(np.linspace(start = 0, stop = 1, num= 11)) # for 10 deciles
+
+  
+
+titanic.describe(include="all")  # donne des stats (count, mean, std, quartiles ... not median)
+
+#in cludes all would include any type, not just nbers. To exclude numbers : 
+
+df.describe(exclude=\[np.number\])  # df.describe(percentiles=np.linspace(start = 0, stop = 1, num= 11))
 
   
 
 </details>
 
 <details>
-<summary> Matplotlib et Seaborn </summary>
-
-  
+<summary> <h3> 2.7. Matplotlib et Seaborn  </h3></summary> 
 
 %matplotlib inline # afficher les graphiques dans la continuité du code, pas dans fenêtre à part
 
@@ -655,314 +955,5 @@ sns.distplot(y, kde=True);
 
 </details>
 
-<details>  
-<summary> Numpy and its arrays (=matrices) </summary>
-
-À chaque fois que vous vous trouvez en train d'utiliser une boucle pour effectuer une opération en Python, demandez-vous si cette opération ne peut pas s'accomplir grâce à Numpy sans boucle.
-
-arrayarrays have same type (unlike lists)
-
-import numpy as np _#alternative : import array as arr_
-
-array\_of\_int = arr.array("i", \[3, 6, 9, 12\]) #array module requires same type (here "i" means integer)
-
-array\_heterog = np.array(\["numbers", 3, 6, 9, 12\])
-
-array = must be declared (created), are more efficient than lists for data storage, can handle math operations
-
-    index 0 for first, -1 for last, negative indices cycle back, \[:2\] from 0(first) to 2(excluded). 
-
-⚠ vecteurs numpy sont (200,) au lieu de (200,1). Cela permet de les voir soit comme ligne, soit comme colonne. Mais parfois il faut tout de même les \`\`\`reshape\`\`\` . 
-
-Création d'un array Numpy: 
-
-  
-
-np.array(myList) # force la conversion le cas échéant, crée des array 1xn ou nxp (avec liste de listes)
-
-np.array(myList, dtype = "float32")
-
-  
-
-Les tableaux remplis : 
-
-np.zeros(10, dtype = int) #tableau 1x10
-
-np.ones((3,50), dtype = float)
-
-np.full((4,4), 3.14)
-
-np.eye(3) #la matrice identité
-
-np.linspace(start= 0 , stop = 1, num = 11)  #un sequence espacée linéairement avec num poteau (num-1 intervalles)
-
-np.arange(start= 0 , stop = 1, step = 0.1) #une autre séquence, presque comme linspace (mais n'inclut par la borne sup)
-
-np.random.rand(3,5) #une matrice aléatoire 3x5 - aussi avec random.random et random.normal
-
-  
-
-myArray.shape #renvoie une liste de 2 élements \[lignes,colonnes\]
-
-numpy.shape -> tuple with size of table .reshape -> change size
-
-  
-
-  
-
-Connaitre le tableau : 
-
-myArray.ndim #nb de dimensions
-
-myArray.shape
-
-myArray.size #nombre total éléments = n x p
-
-myArray.dtype
-
-  
-
-myArray\[1,3:14:2\] #slicing = start:end:step => 3 to 14 by a step of 2
-
-myArray\[::-1\] #reverse of array
-
-myTable\[1,:\] #la première ligne
-
-Manipulations de matrices : 
-
-np.sum(myMatrix,axis = 0) # 0 sum des lignes, 1 sommes des colonnes, pas d'axis -> somme totale
-
-np.mean(myArray)
-
-np.var(myArray) #variance
-
-np.argmin(myArray) #index du min
-
-np.percentile(....) ??
-
-  
-
-np.concatenate(myTable1, myTable2) # use rather np.vstack(myListOfArrays) and np.hstack(myListOfArrays)
-
-np.where(myArrays > 3) #renvoit un extrait - quel type et taille ????
-
-no.newaxis ?!?!?
-
-b = np.arange(3)\[:, np.newaxis\] #cf cours python pour DS3-2.1
-
-  
-
-LA PUISSANCE DE NUMPY, c'est de parcourir des tableaux SANS BOUCLE for: 
-
-\+ - \* / // #division entiere arrondie
-
-np.abs(myArray)
-
-np.exp(myArray) # log, etc.
-
-myArrayOfBool = myArrayOfInt > 3
-
-  
-
-np.sum, np.std, np.argmin np.argmax np.percentile /// pour appliquer sur colonnes / lignes
-
-avec BROADCASTING, on peut faire des opérations, y compris sur des tableaux de taille différente 
-</details>
-
-  
-
 * * *
-
-<details>
-<summary> Pandas 🐼 </summary>
-
-un DF = des lignes (chacune nommée par un index) et des colonnes. 
-
-pandas.Series => objet colonne (Pandas). Pour obtenir colonne numpy, methode .values
-
-Un DF est un ensemble de Series (dès que c'est 2 séries ou plus, c'est un DF) 
-
-  
-
-  
-
-Pour regarder dans un DF: 
-
-  
-
-df = pd.read\_csv("../Dataset/Titanic.csv")
-
-pd.DataFrame(famille\_panda\_numpy, index = \['maman', 'bebe', 'papa'\], columns = \['pattes', 'poil', 'queue', 'ventre'\])
-
-  
-
-population = pd.Series(population\_dict) #une Série (colonne) se construit a partir d'un dict (avec key -> index), ou d'une Liste de valeur avec une liste index (par défaut, index = 0,1,2...)
-
-  
-
-  
-
-df.head(2)
-
-df.shape #returns tuple
-
-df.info() # aussi dtypes (list Names and their types) and describe
-
-len(myDF)
-
-titanic.describe(include="all")  # (from np) donne des stats (count, mean, std, ... not median)
-
-  
-
-  
-
-df.columns  # df.columns.difference(\[''\]) remet les colomnes par ordre alphabe'tique (pourquoi ?!?)
-
-  
-
-myDF\["Ventre"\] myDF.Ventre  # 3 methodes pour extraire unes colonne (objet pandas.Series )
-
-myDF.iloc\[:,0\] # afficher la première colonne
-
-myDF\[\['myColumn1', 'myColumn2'\]\] # attention liste de noms de colonnes
-
-famille\_panda\_df.iloc\[2\] # pour les lignes / index 
-
-famille\_panda\_df.loc\["papa"\] #loc avec les noms, iloc avec les no d'indices
-
-df.loc\[:, \['PClass','Name'\]\]
-
-\---- a bit smarter
-
-mydf.columns.difference(\['Age','SexCode'\]) # afficher toutes les colonnes sauf ... 
-
-\# la méthode columns.difference remet les colonnes par ordre alphabetique (?!?!) 
-
-  
-
-mydf.drop\_duplicates() # voir aussi unique pour la liste
-
-  
-
-#To print, change display options with pandas.set\_options() and pandas.get\_options()
-
-pandas.set\_option('display.max\_rows', None)
-
-On supprime la première colonne inutile
-
-  
-
-df.drop(\['Unnamed: 0'\], axis=1, inplace=True)
-
-  
-
-myDF.append(myOtherDF)
-
-  
-
-On manipule un DF: 
-
-for ind\_ligne, contenu\_ligne in famille\_panda\_df.iterrows(): #envoie (à chaque itération de la boucle for) un tuple dont le premier élément est l'index de la ligne, et le second le contenu de la ligne en question 
-
-  
-
-masque = famille\_panda\_df\["ventre"\] == 80 #renvoi une série de booléens, qui peut servir de masque
-
-df\[df.PClass != "1st"\]  # autre exemple de masque
-
-~ df.PClass.isin(\['1st', '2nd'\]) # autre exemple de masque - le ~ est une negation
-
-myDF\[myDF.PClass.isna()\] # also .notna()
-
-  
-
-famille\_panda\_df\[~masque\] #inversion du masque
-
-\# ======= SORTING ==========
-
-df.Age.sort\_values(ascending=False) # default ascending=True
-
-df.sort\_values(by = \['PClass','Age'\], ascending=\[True,False\]) 
-
-  
-
-  
-
-\# ======== UNIQUE VALUES =======
-
-df.PClass.unique()  # renvoie la liste 
-
-df.PClass.nunique()
-
-  
-
-  
-* Se débarasser des NaN :*  
-(rappel : `na` et `null` désignent la même chose en python, pas comme `R`)
-```(python)
-myDF.fillna(value={"age": 0}).age.head(10)
-myDF.dropna().head(10)
-myDF.dropna(axis="columns").head()
-myDF.dropna(subset = ['column_name'])
-myDF.dropna()     #drop all rows that have any NaN values
-myDF.dropna(how='all')     #drop only if ALL columns are NaN
-myDF.dropna(thresh=2)   #Drop row if it does not have at least two values
-
-myDF.rename(columns={"sex":"sexe"})
-```
-Bon nombre de fonctions Pandas, telles que  dropna  ,  fillna  ,  drop  , etc acceptent un argument  inplace  .
-
-  
-
-titanic.pivot\_table('survived', index='sex', columns='class', aggfunc="sum")
-
-  
-
-Projection = sélection de colonnes
-
-Restriction = sélection de lignes
-
-Union = vstack des lignes 
-
-Jointure = pd.merge
-
-pd.concat(myDF1, myDF2) #par défaut vstack, se change avec arg axis =1
-
-!!! la concatenation concserve les index => utiliser des index hierarchiques
-
-  
-
-df3 = pd.merge(df1, df2, left\_on= "employee", right\_on= "emp\_name")
-
-  
-
-  
-
-Stats on DF : 
-
-  
-
-import numpy as np
-
-  
-
-myDF.Age.mean()  # also median() max() min() std() var() 
-
-df.Age.quantile(\[.1, .5\]) #calculates the quantiles in the list
-
-df.Age.quantile(np.linspace(start = 0, stop = 1, num= 11)) # for 10 deciles
-
-  
-
-titanic.describe(include="all")  # donne des stats (count, mean, std, quartiles ... not median)
-
-#in cludes all would include any type, not just nbers. To exclude numbers : 
-
-df.describe(exclude=\[np.number\])  # df.describe(percentiles=np.linspace(start = 0, stop = 1, num= 11))
-
-  
-
-</details>
-
-* * *
-221011 2023
+221024 1230

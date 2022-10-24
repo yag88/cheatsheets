@@ -193,8 +193,8 @@ Comment résoudre les erreurs
 </details>    
 
 * * *
-<details>
-<summary> <h2> ReprÃ©senter des variables </h2> </summary>
+<!--details-->
+<summary> <h2> Representer des variables </h2> </summary>
 
   
 
@@ -213,7 +213,7 @@ Comment résoudre les erreurs
 * * *
 
 <details>
-<summary> <h2> Representer des variables </h2> </summary>
+<summary> <h2> Composantes et clustering </h2> </summary>
 
 Supervise => j'ai déja des tag d'apprentissage. On parle de **classement**\= classification supervisÃ©e (en EN = "classification").Â 
 
@@ -415,7 +415,7 @@ Le 42 est un seed du random pour que ce soit toujours le même
 
 ***
 
-<!--details-->  
+<details>  
 
 
 <summary>
