@@ -1,169 +1,38 @@
 # 📌Cheatsheet | Statistics
 
----
-[Cheatsheet Anthony : https://asardell.github.io/statistique-python/](https://asardell.github.io/statistique-python/)
 
-[Meme contenu copié sur evernote](evernote:///view/6367254/s57/f1dae14f-b0c0-4024-a6f5-7b2535f53308/67117fc9-036c-4028-b61e-04a2b3349d73/)
+<details> <summary> <h2>Vocabulaire </h2></summary>
 
----
-
-<details>
-<summary> <h2>Vocabulaire </h2></summary>
-
-*   Stat descriptives (qui mesure) vs probabilités = statistiques inférentielles (qui prédit) : _descriptive sur le passé, inférentielle sur le futur)_ 
-    
-
-*   En stat inférentiel, on utilise des tests satistiques = estimateurs, on crée des modèles statistiques
+*   Stat **descriptives** (qui mesurent) vs probabilités = statistiques **inférentielles** (qui prédisent) : _descriptive sur le passé, inférentielle sur le futur)_ 
+    * descriptive => moyenne, écart-type, ...
+    *   En stat inférentielles, on utilise des tests satistiques = estimateurs = pour créer des modèles statistiques
     
 
 *   lignes = individus = unité d'observation = réalisation
     
 *   colonnes = variables = caractères
+    *   variables quantitatives : 
+        * discrètes vs continues
+        * timestamp = nb de secondes depuis 1jan1970 [cf unix time](www.epochconverter.com).  Format ISO 8601 = `1977-04-22T06:00:00Z`
+    
+    *   variables qualitatives => modalités
+        *   soit nominale (y/c booléen ) 
+        - soit ordinale (grand, petit, etc)   
+    * Noir = nominal (quali), ordinal (#quali), interval, ratio (all quanti)
 
-* population vs échantillon = jeu de données = dataset = observation
-    
-*   variables quantitatives : 
-    * discrètes vs continues
-    
-*   variables qualitatives => modalités
-    *   soit nominale, soit ordinale    
 
-* Noir = nominal (quali), ordinal (#quali), interval, ratio (all quanti)
+* échantillon = jeu de données = dataset = observation
+    - **echantillon <> population** 
 
-    
-*   ordinale ( e.g. dates, timestamp). [Conversion](www.epochconverter.com)
-    
-*   boolÃ©enne
-    
+* Midspread - Boxplot - boite à moustache : 
+![image]https://user-images.githubusercontent.com/7408762/197854536-b36e92b2-3057-4bbe-a9d7-d12d7600148a.png    
+
 </details>
 
-
-<details>
-
-<summary> <h2>Nettoyage </h2></summary>
-
-*   Prévoir Aller retour nettoyage et analyse
-    
-*   Valeurs manquantes 
-
-```myDF.isnull().sum() #somme par colonne le nb de manquant``` 
-    
-
-1.  Trouver la bonne valeur (Ã  la main)
-    
-2.  Travailler avec un gruyÃ¨re
-    
-3.  Oublier la variable
-    
-4.  Oublier les individus (mais les individus restants ne sont pas forcÃ©ment reprÃ©sentatifs)
-    
-5.  Imputer (= deviner, e.g. imputation par la moyenne, ou imputer intelligemment, eg selon Ã¢ge pour la taille)
-    
-
-*   Traiter les outliers (= valeur aberrantes)
-    
-    trouvÃ©es par Z-score ou Ã©cart interquartile
-    
-
-1.  Trouver la bonne valeur (Ã  la main)
-    
-2.  Supprimer la valeur ou conserver la valeur ... en fonction des Ã©tudes (e.g. moyenne vs mÃ©diane)
-    
-3.  ... les valeurs atypiques sont intÃ©ressantes, et Ã  mentionner
-    
-
-*   Eliminer les doublons... si on peut
-    
-
-*   Regrouper en gérant les contradictions
-    
-
-*     
-    
-
-  
-
-MÃ©thodeÂ :
-
-*   MÃ©thodeÂ :
-    
-
-*   AllerÂ retour nettoyage et analyse
-    
-*   ValeursÂ manquantes :
-    
-
-*   TrouverÂ la bonne valeur (Ã  la main)
-    
-*   TravaillerÂ avec un gruyÃ¨re
-    
-*   OublierÂ la variable
-    
-*   OublierÂ les individus (mais les individus restants ne sont pas forcÃ©ment reprÃ©sentatifs)
-    
-*   ImputerÂ (= deviner, e.g. imputation par la moyenne, ou imputer intelligemment, eg selon Ã¢ge pour la taille)
-    
-
-*   TraiterÂ les outliers (= valeur aberrantes)
-    
-*   trouvÃ©esÂ par Z-score ou Ã©cart interquartile
-    
-
-*   TrouverÂ la bonne valeur (Ã  la main)
-    
-*   SupprimerÂ la valeur ou conserver la valeur ... en fonction des Ã©tudes (e.g. moyenne vs mÃ©diane)
-    
-*   ...Â les valeurs atypiques sont intÃ©ressantes, et Ã  mentionner
-    
-
-*   EliminerÂ les doublons... si on peut
-    
-
-*   RegrouperÂ en gÃ©rant les contradictions
-    
-
-MÃ©thodeÂ :
-
-*   AllerÂ retour nettoyage et analyse
-    
-*   ValeursÂ manquantes :
-    
-
-*   TrouverÂ la bonne valeur (Ã  la main)
-    
-*   TravaillerÂ avec un gruyÃ¨re
-    
-*   OublierÂ la variable
-    
-*   OublierÂ les individus (mais les individus restants ne sont pas forcÃ©ment reprÃ©sentatifs)
-    
-*   ImputerÂ (= deviner, e.g. imputation par la moyenne, ou imputer intelligemment, eg selon Ã¢ge pour la taille)
-    
-
-*   TraiterÂ les outliers (= valeur aberrantes)
-    
-*   trouvÃ©esÂ par Z-score ou Ã©cart interquartile
-    
-
-*   TrouverÂ la bonne valeur (Ã  la main)
-    
-*   SupprimerÂ la valeur ou conserver la valeur ... en fonction des Ã©tudes (e.g. moyenne vs mÃ©diane)
-    
-*   ...Â les valeurs atypiques sont intÃ©ressantes, et Ã  mentionner
-    
-
-*   EliminerÂ les doublons... si on peut
-    
-
-*   RegrouperÂ en gÃ©rant les contradictions
-    
-</details>
-
-<details>
-<summary> <h2>Erreurs et imputations </h2></summary>
+<details> <summary> <h2> Nettoyer </h2></summary>
 
 7 types d'erreurs :
-1.  Valeurs manquantes
+1.  **Valeurs manquantes**
 2.  **Erreur lexicale** (e.g. texte quand nombre attendu, ou liste limitative de pays possibles,,)
 3.  **Irrégularité** (e.g. cm quand m attendu)
     
@@ -172,28 +41,75 @@ MÃ©thodeÂ :
 6.  **doublon** (+ parfois **contradiction** si les doublons ont des valeurs différentes)
 7.  valeur extrème = **atypique** (pas fausse) ou **aberrante** (fausse)
     
-Comment résoudre les erreurs 
+Comment résoudre les erreurs (Prévoir des aller-retours entre nettoyage et analyse) : 
 
-0. On peut **suprrimer** les individus avec erreur ... si ceux qui restent sont suffisants / non biaisés.
+<details> <summary> <h3> N.1. Valeurs manquantes : imputation </h3> </summary>
 
-1. Valeur manquante = 
-    * **imputation** e.g. imputation par la moyenne (simple) -> méthode de hot-deck, Machine Learning / KNN, régressions
-    * ou travailler avec un gruyère (données à trou, selon le traitement statistique)
+Bibliotheque spécialisée : `missingno` 
+1.  Trouver la bonne valeur (à la main)
+    
+2.  Travailler avec un gruyère (données à trou, selon le traitement statistique)
+3.  Oublier la variable
+    
+4.  Oublier les individus (mais les individus restants ne sont pas forcÃ©ment représentatifs)
+    
+5.  **Imputer** = deviner, e.g. imputation par la moyenne, ou imputer intelligemment, eg selon âge pour la taille, ou méthode de hot-deck, Machine Learning / KNN, régressions)
 
-6.  Doublon 
+```(python)
+myDF.isnull().sum() #somme par colonne le nb de manquant
+data['nom_colonne'] = nouvelle_colonne
+mask = # condition à vérifier pour cibler spécifiquement certaines lignes
+data.loc[mask, 'ma_colonne'] = nouvelles_valeurs
+
+data['taille'] = data['taille'].str[:-1] # supprimer le dernier caractere
+data['taille'] = pd.to_numeric(data['taille'], errors='coerce')
+
+data['Dept'].value_counts()
+# ou
+data['Dept'].unique()
+```
+
+</details>
+
+<details> <summary> <h3> N.2.Eliminer les doublons... si on peut </h3> </summary>
+
+* Identifier les doublons : pas de règles, à identifier en fonction du contexte.
+
+*   Regrouper en gérant les contradictions
     * methodes `myDF.duplicated() myDF.duplicate() myDF.unique()`
     * contradiction : à ignorer, ou prendre la moyenne
     * parfois regroupement (information 1 individu répartie sur plusieurs lignes)
 
-7.  Valeur extrème  = 
-    * choix des traitements, e.g. la moyenne est sensible aux outliers, pas la médiane 
+```(python)
+data.loc[data.duplicated(keep=False),:]
+```
+
+</details>
+
+<details> <summary> <h3> N.3.Traiter les outliers (= valeur aberrantes)  </h3> </summary>
+
+-    trouvées par Z-score ou écart interquartile IQR (outliers are defined as mild above Q3 + 1.5 IQR and extreme above Q3 + 3 IQR.)
     * midspread ou Z-score, 
     * boite a moustache (boxplot)
+-  Trouver la bonne valeur (à  la main)
+-  Supprimer la valeur ou conserver la valeur ... en fonction des études (e.g. moyenne vs médiane)
+-  ... les valeurs **atypiques** sont intéressantes, et à mentionner
+
+![1024px-Boxplot_vs_PDF svg](https://user-images.githubusercontent.com/7408762/197854536-b36e92b2-3057-4bbe-a9d7-d12d7600148a.png)
+
+</details>
+
+<details><summary> <h3>N.4.Autres erreurs </h3></summary>
+
+* On peut **supprimer** les individus avec erreur ... si ceux qui restent sont suffisants / non biaisés.
+
+* Erreur lexicale = souvent pas de correction possible
+* Irrégularité, formatage  = parfois correction à la main possible 
 
 </details>    
 
 * * *
-<!--details-->
+
 <summary> <h2> Representer des variables </h2> </summary>
 
   
@@ -434,10 +350,11 @@ Le 42 est un seed du random pour que ce soit toujours le même
             ```(python)
              ajouter ici code pandas
             ``` 
+
     </details>
 
-        - $β=(X^⊤X)^{−1}X^⊤y$ 
-        - ... et si $X^TX$ non inversible (notamment si colonnes corrélées), utiliser pseudo-inversible. Mais le modèle (la signification des $β_i$) est alors moins interprétable...
+    - $β=(X^⊤X)^{−1}X^⊤y$ 
+    - ... et si $X^TX$ non inversible (notamment si colonnes corrélées), utiliser pseudo-inversible. Mais le modèle (la signification des $β_i$) est alors moins interprétable...
     - si correlation, ou trop peu d'observation, la matrice des $X^TX$ n'est pas inversible => Sur-apprentissage car modele trop complexe
         - => Alors on minimise une fonction objectif = erreur + complexité 
         = minimum en $β$ du carré des erreurs + λ.régularisateur(β) = $min_{β ∈ \mathbb{R}^{p+1}} (y−Xβ)^⊤(y−Xβ) + λ Regularisateur(β)$
@@ -458,6 +375,14 @@ Le 42 est un seed du random pour que ce soit toujours le même
             - consiste à combiner normes 1 et 2 sur $β$, avec cette fois 2 hyperparamètres $λ$ et $α$
             - $min_{β ∈ \mathbb{R}^{p+1}} (y−Xβ)^⊤(y−Xβ) + λ ((1-α)||β||_1 + α)||β||_2)$
             - => solution moins parcimonieuse, mais plus stable que LASSO
+
+- Evaluer la performance d'une régression  
+    - Avec ordre de grandeur : MSE et RMSE = mean squared error (mean of RSS = residual sum of squares = somme des carrés des résidus)
+    - Sans ordre de grandeur : RMSLE et R^2
+        - RMSLE = squared log error, si on veut une comparer sur des données à ordre de grandeur différents (erreur en % écart de la prédiction)
+        - coef de détermination R^2 = 1- RSE (Relative Squared Error = erreur en % écart à la moyenne) = corrélation de Pearson entre valeurs vraies et prédites. See `sklearn.metrics.r2_score`
+
+
 </details>
 <details>
 <summary> <h3> M.2 Modèles prédictifs linéaires pour classification </h3> </summary>
@@ -607,11 +532,27 @@ print("accuracy {:.2f} time {:.2f}s".format(accuracy, elapsed))
     - on pondere chacun des points à chaque generation
 
 - Gradient de Boosting : 
-    - 
-    
-</details>
+    - jhkjhj
+
 </details>
 
-chgt 11oct22 2021
+</details>
 
-* * * 
+</details>
+
+<details>
+<summary> Sources </summary>
+---
+[Cheatsheet Anthony : https://asardell.github.io/statistique-python/](https://asardell.github.io/statistique-python/)
+
+[Meme contenu copié sur evernote](evernote:///view/6367254/s57/f1dae14f-b0c0-4024-a6f5-7b2535f53308/67117fc9-036c-4028-b61e-04a2b3349d73/)
+</details
+>
+---
+
+***
+
+
+chgt 02nov22 2021
+
+*** 
