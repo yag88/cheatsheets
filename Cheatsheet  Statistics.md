@@ -1,7 +1,7 @@
 # 📌Cheatsheet | Statistics
 
 
-<details> <summary> <h2>Vocabulaire </h2></summary>
+<details><summary><h2>Vocabulaire</h2></summary>
 
 *   Stat **descriptives** (qui mesurent) vs probabilités = statistiques **inférentielles** (qui prédisent) : _descriptive sur le passé, inférentielle sur le futur)_ 
     * descriptive => moyenne, écart-type, ...
@@ -23,6 +23,7 @@
 
 * échantillon = jeu de données = dataset = observation
     - **echantillon <> population** 
+    - distribution empirique =constatée.
 
 * Midspread - Boxplot - boite à moustache : 
 ![image](https://user-images.githubusercontent.com/7408762/197854536-b36e92b2-3057-4bbe-a9d7-d12d7600148a.png)
@@ -31,7 +32,7 @@
 
 ***
 
-<details> <summary> <h2> Nettoyer </h2></summary>
+<details> <h2><summary>  Nettoyer </summary></h2>
 
 7 types d'erreurs :
 1.  **Valeurs manquantes**
@@ -51,24 +52,18 @@ Bibliotheque spécialisée : `missingno`
 1.  Trouver la bonne valeur (à la main)
     
 2.  Travailler avec un gruyère (données à trou, selon le traitement statistique)
-3.  Oublier la variable
+3.  Oublier la variable (si trop de trous)
     
-4.  Oublier les individus (mais les individus restants ne sont pas forcÃ©ment représentatifs)
+4.  Amputer = oublier les individus (risque: les individus restants ne sont pas forcément représentatifs)
     
 5.  **Imputer** = deviner, e.g. imputation par la moyenne, ou imputer intelligemment, eg selon âge pour la taille, ou méthode de hot-deck, Machine Learning / KNN, régressions)
 
-```(python)
+```python
 myDF.isnull().sum() #somme par colonne le nb de manquant
-data['nom_colonne'] = nouvelle_colonne
-mask = # condition à vérifier pour cibler spécifiquement certaines lignes
-data.loc[mask, 'ma_colonne'] = nouvelles_valeurs
 
-data['taille'] = data['taille'].str[:-1] # supprimer le dernier caractere
-data['taille'] = pd.to_numeric(data['taille'], errors='coerce')
+data.loc[data['taille'].isnull(), 'taille'] = data['taille'].mean()
 
-data['Dept'].value_counts()
-# ou
-data['Dept'].unique()
+
 ```
 
 </details>
@@ -82,19 +77,24 @@ data['Dept'].unique()
     * contradiction : à ignorer, ou prendre la moyenne
     * parfois regroupement (information 1 individu répartie sur plusieurs lignes)
 
-```(python)
-data.loc[data.duplicated(keep=False),:]
+```python
+data.loc[data.duplicated(keep=False),:] # duplicated returns Booleans
+
+
+data['Dept'].value_counts()
+# ou
+data['Dept'].unique()
 ```
 
 </details>
 
 <details> <summary> <h3> N.3.Traiter les outliers (= valeur aberrantes)  </h3> </summary>
 
--    trouvées par Z-score ou écart interquartile IQR (outliers are defined as mild above Q3 + 1.5 IQR and extreme above Q3 + 3 IQR.)
-    * midspread ou Z-score, 
+- Trouvées par Z-score ou écart interquartile IQR (outliers are defined as mild above Q3 + 1.5 IQR and extreme above Q3 + 3 IQR.)
+    * midspread ou Z-score :  $z = (x – μ)/σ$ 
     * boite a moustache (boxplot)
--  Trouver la bonne valeur (à  la main)
--  Supprimer la valeur ou conserver la valeur ... en fonction des études (e.g. moyenne vs médiane)
+- Trouver la bonne valeur (à  la main)
+- Supprimer la valeur ou conserver la valeur ... en fonction des études (e.g. moyenne vs médiane)
 -  ... les valeurs **atypiques** sont intéressantes, et à mentionner
 
 ![1024px-Boxplot_vs_PDF svg](https://user-images.githubusercontent.com/7408762/197854536-b36e92b2-3057-4bbe-a9d7-d12d7600148a.png)
@@ -108,34 +108,259 @@ data.loc[data.duplicated(keep=False),:]
 * Erreur lexicale = souvent pas de correction possible
 * Irrégularité, formatage  = parfois correction à la main possible 
 
+```python
+data['nom_colonne'] = nouvelle_colonne
+mask = # condition à vérifier pour cibler spécifiquement certaines lignes
+data.loc[mask, 'ma_colonne'] = nouvelles_valeurs
+VALID_COUNTRIES = ['France', 'Côte d\'ivoire', 'Madagascar', 'Bénin', 'Allemagne'
+, 'USA']
+mask = ~data['pays'].isin(VALID_COUNTRIES)
+data.loc[mask, 'pays'] = np.NaN
+
+data['email'] = data['email'].str.split(',', n=1, expand=True)[0]
+
+data['taille'] = data['taille'].str[:-1] # supprimer le dernier caractere
+data['taille'] = pd.to_numeric(data['taille'], errors='coerce')
+```
+
 </details>    
+</details>
 
 * * *
 
-<summary> <h2> Representer des variables </h2> </summary>
+<h2>
+<details><summary> Représenter une variable par analyse monovariée</summary>
+</h2>
 
-  
+<details><summary> <h3> R.1.Variables qualitatives :  </h3> </summary>
 
-  
 
-  
+```python
+# PIE CHART Diagramme en secteurs
+data["categ"].value_counts(normalize=True).plot(kind='pie')
+# Cette ligne assure que le pie chart est un cercle plutôt qu'une éllipse
+plt.axis('equal')
+plt.show() # Affiche le graphique
 
-  
+# BAR CHART Diagramme en tuyaux d'orgues
+data["categ"].value_counts(normalize=True).plot(kind='bar')
+plt.show()
 
-  
+# TABLEAU avec effectifs, freq, freq cumulée
+effectifs = myData["Modalité"].value_counts()
+modalites = effectifs.index # l'index de effectifs (= de myData) contient les modalités
+myTable = pd.DataFrame(modalites, columns = ["Modalité"]) # création du tableau à partir des modalités
+myTable["effectif n"] = effectifs.values
+myTable["frequency f"] = myTable["effectif n"]] / len(myData) # Rappel len(myDataFrame) renvoie la taille de l'échantillon = le nb de lignes
+myTable = myTable.sort_values("Modalité") # tri des valeurs de la variable X (croissant)
+myTable["Cumulated Freq F"] = myTable["frequency f"].cumsum() # cumsum calcule la somme cumulée
+``` 
 
-  
-
-  
 </details>
+
+<details><summary> <h3> R.2.Variables quantitatives et moments  </h3> </summary>
+
+```python
+# BAR CHART pour var discretes # Diagramme en bâtons
+data['quart_mois'] = [int((jour-1)*4/31)+1 for jour in data["date_operation"].dt.day]
+data["quart_mois"].value_counts(normalize=True).plot(kind='bar',width=0.1)
+plt.show()
+
+# BAR CHART pour var continues = Histogramme
+data["montant"].hist(density=True)
+plt.show()
+# Histogramme plus beau
+data[data.montant.abs() < 100]["montant"].hist(density=True,bins=20)
+plt.show()
+
+#Fonction de répartition empirique (= histogramme cumulé)
+
+# Mesures de tendance centrale : 
+data['montant'].mode() #renvoie un Series, car il peut y avoir plusieurs modes
+data['montant'].mean()
+data['montant'].median()
+
+# Moments d'ordre 2
+data['montant'].var() # variance empirique (avec biais)
+data['montant'].var(ddof=0) #variance empirique (sans biais)
+data['montant'].std()   # s ecart type 
+data['montant'].std/data['montant'].mean() # coeff variation
+
+data.boxplot(column="montant", vert=False) 
+plt.show()
+
+#Moments d'ordre 3 et 4
+data['montant'].skew()
+data['montant'].kurtosis()
+
+```
+**Règle de Sturges** = le nb de classes optimales est $(1+log2(n))$
+
+**Variance empirique** = second moment = 
+$v = \frac{1}{n} \sum_{i=1}^{n}(x_i-\overline{x})^2 = s^2$
+
+**Variance empirique sans biais** = 
+$s'^2 = \frac{1}{n-1} \sum_{i=1}^{n}(x_i-\overline{x})^2$
+(pour un grand échantillon, pas de différence avec/sans biais)
+
+**Coeff de variation** = $CV = \frac{s}{overline{x}}$ où $s$ l'écart type empirique ($\sigma$ écart type population) 
+
+**Ecart Moyen Absolu** = variance avec norme 1 = $EMA = \frac{1}{n}\sum_{i=1}^{n}{|x_i - \overline{x}|}$ 
+
+EMA peut aussi se calculer par écart à la médiane. 
+
+**Skewness =assymétrie** = third standardised moment = $\tilde{\mu}_3 = \frac{\mu_3}{s^3} = \frac{1}{s^3}\frac{1}{n}\sum_{i=1}^{n}(x_i-\overline{x})^3$
+
+Skweness > 0 = positive skew = long right tail = generally, mean>median
+
+**Kurtosis =aplatissement** = fourth standardised moment = $\tilde{\mu}_4 = \frac{\mu_4}{s^4} = \frac{1}{s^4}\frac{1}{n}\sum_{i=1}^{n}(x_i-\overline{x})^4$
+
+Kurtosis > 0 = positive curtosis = pointier than gaussian curve
+
+(Note : first and second standardised moment are always 0 and 1)
+
+</details>
+
+<details><summary> <h3> R.3.Variables quantitatives et concentration  </h3> </summary>
+
+Les 3 courbes (exemple de la concentration des richesses): 
+- Courbe de Lorenz = pauvres à gauche, riches à droite = escaliers de hauteur total 1=100%
+    - la personne à 50% de l'axe horizontal a le salaire médian.
+    - le salaire médial est est celui de la personne correspondant à la hauteur 50%.
+- Indice de Bini = calculé sur la courbe de Lorenz 
+    - Igini = 2 x aire entre Lorenz et la première bissectrice
+    - Gini = 0 => égalité parfaite
+    - Gini = 1 => inégalité parfaite (1 personne cumule tout)
+- Pareto : "les X% les + riches possèdent Y% de la richesses"    
+
+```python
+depenses = data[data['montant'] < 0] dep = -depenses['montant'].values n = len(dep) lorenz = np.cumsum(np.sort(dep)) / dep.sum() lorenz = np.append([0],lorenz) # La courbe de Lorenz commence à 0 
+xaxis = np.linspace(0-1/n,1+1/n,n+1) #Il y a un segment de taille n pour chaque individu, plus 1 segment supplémentaire d'ordonnée 0. Le premier segment commence à 0-1/n, et le dernier termine à 1+1/n. 
+plt.plot(xaxis,lorenz,drawstyle='steps-post') 
+plt.show()
+
+AUC = (lorenz.sum() -lorenz[-1]/2 -lorenz[0]/2)/n # Surface sous la courbe de Lorenz. Le premier segment (lorenz[0]) est à moitié en dessous de 0, on le coupe donc en 2, on fait de même pour le dernier segment lorenz[-1] qui est à moitié au dessus de 1. 
+S = 0.5 - AUC # surface entre la première bissectrice et le courbe de Lorenz 
+gini = 2*S gini
+```
+
+</details>
+
+</details>
+
+* * *
+
+<details>
+<summary> <h2> Représenter des analyses bivariées </h2> </summary>
+
+<details><summary><h3>B1. Corrélation et covariance</h3></summary>
+
+**Scatterplot** diagramme de dispersion
+
+**tableau de contingence** (`pivot_table`) contient les effectifs conjoints $n_{ij}$
+- la distribution conjointe empirique sont $n_{ij}$
+- la distribution marginale empirique de $X_i$ ou de $Y_j$ sont les sous-totaux $n_i$ ou $n_j$
+- la distribution conditionnelle empirique de $X_i$ sachant $Y_0$ est une ligne/colonne d'effectifs conjoints
+
+**Covariance** $cov(X,Y) = s_{X,Y} = \frac{1}{n}\sum_{i=1}^{n} (x_i-\overline{x}) (y_i−\overline{y})$
+
+**Correlation (linéaire) (de Pearson)** = covariance / les 2 écarts-types
+- entre -1 et 1
+- n'est pas causalité (cf multiples exemples, dont le paradoxe de Simpson)
+- ne détecte que les relations linéaires (Cf exemple du cercle)
+
+**Regression simple** $Y = a.X + b + \epsilon$ 
+- où les estimateurs selon les Ordinary Least Squares (Moindres Carrés Ordinaires) sont : 
+- $\hat{a} = \frac{cov(X,Y)}{s_X^2}$ et $\hat{b} = \overline{y} - \hat{a}.\overline{x}$
+- $R^2$ = carré de la corrélation entre X et Y = % explicatif de la régression (somme des carrés expliqués / somme des carrés totaux)
+- cette régression linéaire est peu robustes aux valeurs aberrantes
+
+```python
+import scipy.stats as st # corrélation par scipy.stats.pearsonr
+st.pearsonr(depenses["solde_avt_ope"],-depenses["montant"])[0]
+# Par numpy = matrice de covariance, corr = valeur en [1,0]
+np.cov(depenses["solde_avt_ope"],-depenses["montant"],ddof=0)[1,0]
+
+import statsmodels.api as sm
+Y = courses['montant']
+X = courses[['attente']]
+X = X.copy() # On modifiera X, on en crée donc une copie
+X['intercept'] = 1.
+result = sm.OLS(Y, X).fit() # OLS = Ordinary Least Square (Moindres Carrés Ordinaire)
+a,b = result.params['attente'],result.params['intercept']
+
+plt.plot(courses.attente,courses.montant, "o")
+plt.plot(np.arange(15),[a*x+b for x in np.arange(15)])
+plt.xlabel("attente")
+plt.ylabel("montant")
+plt.show()
+```
+
+</details>
+
+<details><summary> <h3>B.2. ANOVA = corrélation entre quanti et quali</h3></summary>
+
+On décompose en 3 : 
+- Total Sum of Squares = variation totale $= \sum\limits_{i=1}^{k} \sum\limits_{j=1}^{n_i} (y_{ij} − \overline{y})^2$
+- Sum of Squares of the Model = variation interclasse (= somme des carrés expliqués) $= \sum\limits_{i=1}^{k} n_i (\hat{y_{i}} − \overline{y})^2$
+- Sum of Squares of the Error = variation intraclasse $= \sum\limits_{i=1}^{k}  \sum\limits_{j=1}^{n_i} (y_{ij} − \hat{y_i})^2 = \sum\limits_{i=1}^{k} n_i s_i^2$
+- le rapport de corrélation est maintenant eta squared : 
+
+$$η_{Y,X}^2 = \frac{V_{interclasses}}{V_{totale}}$$
+
+```python
+modalites = sous_echantillon[X].unique()
+groupes = []
+
+for m in modalites:
+    groupes.append(sous_echantillon[sous_echantillon[X]==m][Y])
+# Graphiques = points rouges pour la moyenne  
+medianprops = {'color':"black"}
+meanprops = {'marker':'o', 'markeredgecolor':'black',
+            'markerfacecolor':'firebrick'} 
+plt.boxplot(groupes, labels=modalites, showfliers=False, medianprops=medianprops, 
+            vert=False, patch_artist=True, showmeans=True, meanprops=meanprops)
+plt.show()
+```
+
+</details>
+
+<h3>
+<details><summary>B.3. Chi-2 entre 2 variables quali</summary>
+</h3>
+
+Le tableau de contingence compare les effectifs conjoints $n_{ij}$ aux effectifs prévus en cas d'indépendance $n_j x frequency(i) = n_j . n_i / n$
+
+Cette comparaison donne une corrélation $\xi_{ij}$ a representer par une carte de chaleur _heatmap_. Valeur entre 0 et 1 = % de contribution à la dépendance (non-indépendance), la somme des contribution = 100%. 
+
+
+
+```python
+import seaborn as sns
+tx = cont.loc[:,["Total"]]
+ty = cont.loc[["Total"],:]
+n = len(data)
+indep = tx.dot(ty) / n
+c = cont.fillna(0) # On remplace les valeurs nulles par 0
+measure = (c-indep)**2/indep
+xi_n = measure.sum().sum()
+table = measure/xi_n
+sns.heatmap(table.iloc[:-1,:-1],annot=c.iloc[:-1,:-1])
+plt.show()
+```
+
+</details>
+
+</details>
+
 * * *
 
 <details>
 <summary> <h2> Composantes et clustering </h2> </summary>
 
-Supervise => j'ai déja des tag d'apprentissage. On parle de **classement**\= classification supervisÃ©e (en EN = "classification").Â 
+Supervise => j'ai déja des tag d'apprentissage. On parle de **classement**\= classification supervisée (en EN = "classification").  
 
-Non supervisÃ© =Â  **clusteringÂ** 
+Non supervisé = **clustering** 
 
 ![](ðŸ“ŒCheatsheet  Statistics_files/Image.png)
 
