@@ -25,9 +25,11 @@
     - **echantillon <> population** 
 
 * Midspread - Boxplot - boite à moustache : 
-![image]https://user-images.githubusercontent.com/7408762/197854536-b36e92b2-3057-4bbe-a9d7-d12d7600148a.png    
+![image](https://user-images.githubusercontent.com/7408762/197854536-b36e92b2-3057-4bbe-a9d7-d12d7600148a.png)
 
 </details>
+
+***
 
 <details> <summary> <h2> Nettoyer </h2></summary>
 
