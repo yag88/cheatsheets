@@ -561,10 +561,10 @@ avec BROADCASTING, on peut faire des opérations, y compris sur des tableaux de 
 
 * * *
 
-<!--details-->
+<details>
 <summary> <h3> 2.6. Pandas 🐼  </h3></summary>
 
-* fundamental [data structures](https://pandas.pydata.org/pandas-docs/stable/user_guide/10min.html) = DF + Series : 
+* fundamental [data structures](https://pandas.pydata.org/pandas-docs/stable/user_guide/10min.html) = DataFrame + Series : 
     * `pandas.DataFrame` = 2-dimensional, labeled structure, with 1 type per column.
         * Rows have an index, columns have names . 
        	* DF equivalent to spreadsheet = SQL table = dict of Series = 2-D ndarray = structured 1-D ndarray 
@@ -576,12 +576,12 @@ avec BROADCASTING, on peut faire des opérations, y compris sur des tableaux de 
 
 
 * Pour regarder dans un DF: 
-```(python)
-df = pd.read\_csv("../Dataset/Titanic.csv")
+```python
+df = pd.read_csv("../Dataset/Titanic.csv")
 
-pd.DataFrame(famille\_panda\_numpy, index = \['maman', 'bebe', 'papa'\], columns = \['pattes', 'poil', 'queue', 'ventre'\])
+pd.DataFrame(famille_panda_numpy, index = ['maman', 'bebe', 'papa'], columns = ['pattes', 'poil', 'queue', 'ventre'])
 
-population = pd.Series(population\_dict) #une Série (colonne) se construit a partir d'un dict (avec key -> index), ou d'une Liste de valeur avec une liste index (par défaut, index = 0,1,2...)
+population = pd.Series(population_dict) #une Série (colonne) se construit a partir d'un dict (avec key -> index), ou d'une Liste de valeur avec une liste index (par défaut, index = 0,1,2...)
 
 df.head(2)
 
@@ -595,57 +595,30 @@ titanic.describe(include="all")  # (from np) donne des stats (count, mean, std, 
 ```
   
 * Basic manipulation of DF / Series
-```(python)
-
-  
-
-  
-
+```python
 df.columns  # df.columns.difference(\[''\]) remet les colomnes par ordre alphabe'tique (pourquoi ?!?)
+myDF["Ventre"] myDF.Ventre  # 3 methodes pour extraire unes colonne (objet pandas.Series )
+myDF.iloc[:,0] # afficher la première colonne
+myDF[['myColumn1', 'myColumn2']] # attention liste de noms de colonnes
+famille_panda_df.iloc[2] # pour les lignes / index 
+famille_panda_df.loc["papa"] #loc avec les noms, iloc avec les no d'indices
+df.loc[:, ['PClass','Name']]
 
-  
-
-myDF\["Ventre"\] myDF.Ventre  # 3 methodes pour extraire unes colonne (objet pandas.Series )
-
-myDF.iloc\[:,0\] # afficher la première colonne
-
-myDF\[\['myColumn1', 'myColumn2'\]\] # attention liste de noms de colonnes
-
-famille\_panda\_df.iloc\[2\] # pour les lignes / index 
-
-famille\_panda\_df.loc\["papa"\] #loc avec les noms, iloc avec les no d'indices
-
-df.loc\[:, \['PClass','Name'\]\]
-
-\---- a bit smarter
-
-mydf.columns.difference(\['Age','SexCode'\]) # afficher toutes les colonnes sauf ... 
-
-\# la méthode columns.difference remet les colonnes par ordre alphabetique (?!?!) 
-
-  
+# ---- a bit smarter
+mydf.columns.difference(['Age','SexCode']) # afficher toutes les colonnes sauf ... 
+# la méthode columns.difference remet les colonnes par ordre alphabetique (?!?!) 
 
 mydf.drop\_duplicates() # voir aussi unique pour la liste
 
-  
+#To print, change display options with pandas.set\_options() and pandas
+get_options()
+pandas.set_option('display.max_rows', None)
 
-#To print, change display options with pandas.set\_options() and pandas.get\_options()
-
-pandas.set\_option('display.max\_rows', None)
-
-On supprime la première colonne inutile
-
-  
-
-df.drop(\['Unnamed: 0'\], axis=1, inplace=True)
-
-  
-
+# On supprime la première colonne inutile
+df.drop(['Unnamed: 0'], axis=1, inplace=True)
 myDF.append(myOtherDF)
 ```
-
-  
-
+\
 On manipule un DF: 
 
 for ind\_ligne, contenu\_ligne in famille\_panda\_df.iterrows(): #envoie (à chaque itération de la boucle for) un tuple dont le premier élément est l'index de la ligne, et le second le contenu de la ligne en question 

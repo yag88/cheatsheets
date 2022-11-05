@@ -26,13 +26,25 @@
     - distribution empirique =constatée.
 
 * Midspread - Boxplot - boite à moustache : 
+    - Rappel $±1.σ = 68\%$ ; $±2.σ = 95\%$ ; $±3.σ = 99.7\% $
 ![image](https://user-images.githubusercontent.com/7408762/197854536-b36e92b2-3057-4bbe-a9d7-d12d7600148a.png)
+
+* **Machine learning** = modélisation statistique à partir des données
+    * deep learning = apprentissage direct à partir des données brutes
+    * les 5 classiques à connaitre= **regression, Knn, SVM, réseaux de neurones, random forests**. 
+        * supervisé = j'ai un jeu d'apprentissage, sur lequel je connais le résultat attendu = on espère prédire
+        * non supervisé = l'algorithme doit trouver tout seul les similarités = on espère découvrir des relations latentes. Aussi ∃ semi-supervised = une partie des données sont annotées
+        * reinforcement learning = non supervisé, mais récompense améliore les opérations (typique : jeu d'échec)
+    * 3 sorties : quanti, quali, ordre (regression, classification, ranking)
+    * Librairies python : scikit-learn, tensorflow, torch, theano, caffe. 
+    * Généralisation = prédictions sur nouvelles données (test ou autre)
+
 
 </details>
 
 ***
 
-<details> <h2><summary>  Nettoyer </summary></h2>
+<details><summary><h2> Nettoyer </h2></summary>
 
 7 types d'erreurs :
 1.  **Valeurs manquantes**
@@ -46,7 +58,7 @@
     
 Comment résoudre les erreurs (Prévoir des aller-retours entre nettoyage et analyse) : 
 
-<details> <summary> <h3> N.1. Valeurs manquantes : imputation </h3> </summary>
+<details> <summary> <h3> N.1. Imputer les valeurs manquantes </h3> </summary>
 
 Bibliotheque spécialisée : `missingno` 
 1.  Trouver la bonne valeur (à la main)
@@ -62,8 +74,6 @@ Bibliotheque spécialisée : `missingno`
 myDF.isnull().sum() #somme par colonne le nb de manquant
 
 data.loc[data['taille'].isnull(), 'taille'] = data['taille'].mean()
-
-
 ```
 
 </details>
@@ -88,7 +98,7 @@ data['Dept'].unique()
 
 </details>
 
-<details> <summary> <h3> N.3.Traiter les outliers (= valeur aberrantes)  </h3> </summary>
+<details><summary><h3> N.3.Traiter les outliers (= valeur aberrantes)  </h3> </summary>
 
 - Trouvées par Z-score ou écart interquartile IQR (outliers are defined as mild above Q3 + 1.5 IQR and extreme above Q3 + 3 IQR.)
     * midspread ou Z-score :  $z = (x – μ)/σ$ 
@@ -124,13 +134,13 @@ data['taille'] = pd.to_numeric(data['taille'], errors='coerce')
 ```
 
 </details>    
+
 </details>
 
 * * *
 
-<h2>
-<details><summary> Représenter une variable par analyse monovariée</summary>
-</h2>
+<details><summary> <h2>Représenter une variable par analyse monovariée</h2></summary>
+
 
 <details><summary> <h3> R.1.Variables qualitatives :  </h3> </summary>
 
@@ -223,7 +233,7 @@ Kurtosis > 0 = positive curtosis = pointier than gaussian curve
 
 <details><summary> <h3> R.3.Variables quantitatives et concentration  </h3> </summary>
 
-Les 3 courbes (exemple de la concentration des richesses): 
+Les 3 approches (avec l'exemple de la concentration des richesses): 
 - Courbe de Lorenz = pauvres à gauche, riches à droite = escaliers de hauteur total 1=100%
     - la personne à 50% de l'axe horizontal a le salaire médian.
     - le salaire médial est est celui de la personne correspondant à la hauteur 50%.
@@ -325,13 +335,14 @@ plt.show()
 
 </details>
 
-<h3>
-<details><summary>B.3. Chi-2 entre 2 variables quali</summary>
-</h3>
 
-Le tableau de contingence compare les effectifs conjoints $n_{ij}$ aux effectifs prévus en cas d'indépendance $n_j x frequency(i) = n_j . n_i / n$
+<details><summary><h3> B.3. Chi-2 entre 2 variables quali</h3></summary>
 
-Cette comparaison donne une corrélation $\xi_{ij}$ a representer par une carte de chaleur _heatmap_. Valeur entre 0 et 1 = % de contribution à la dépendance (non-indépendance), la somme des contribution = 100%. 
+
+Le tableau de contingence compare les effectifs conjoints $n_{ij}$ aux effectifs prévus en cas d'indépendance $n_j . frequency(i) = n_j . n_i / n$
+
+Cette comparaison donne une corrélation $\xi_{ij}$ qu'on represente avec une carte de chaleur _heatmap_. Valeur entre 0 et 1 = % de contribution à la dépendance (non-indépendance). 
+La somme des contribution = 100%. 
 
 
 
@@ -364,17 +375,14 @@ Non supervisé = **clustering** 
 
 ![](ðŸ“ŒCheatsheet  Statistics_files/Image.png)
 
-  
-
-D
 
 * * *
 
-Distance (erreur = risque = eloignement des donnÃ©es vs prediction modele)
+Distance (erreur = risque = eloignement des données vs prediction modele)
 
 Attention : erreur = risque empirique != performance du modele
 
-*   erreur quadratique (le + utilisÃ©)
+*   erreur quadratique (le + utilisé)
     
 
 *   distance euclidienne = sqr(x^2 + y^2)
@@ -388,9 +396,9 @@ Attention : erreur = risque empirique != performance du modele
 *   a connaitre = algo de Wagner et Fischer pour le calcul de la distance de Levenshtein.
     
 
-algo paramÃ©triques (eg regression = droite) => on cherche le parametreÂ Î¸ (qui peut etre multidimensionel)
+algo paramétriques (eg regression = droite) => on cherche le parametreÂ Î¸ (qui peut etre multidimensionel)
 
-algos non parametriques (+ complexitÃ©) => egg k-means qui est 'memory based' (garde toutes les donnÃ©es en memoire)
+algos non parametriques (+ complexité) => egg k-means qui est 'memory based' (garde toutes les données en memoire)
 
   
 
@@ -400,7 +408,7 @@ algos non parametriques (+ complexitÃ©) => egg k-means qui est 'memory based' 
 
 fuction loss = perte d'information
 
-vraisemblance d'un jeu d'observations (x1...xN) par rapport Ã  un modÃ¨le en statistiques est la fonction suivante :Â Â L(Î¸)=p(x1...xN|Î¸)Â Â .= proba d'avoir x1...xN sachant \\Theta
+vraisemblance d'un jeu d'observations (x1...xN) par rapport Ã  un modèle en statistiques est la fonction suivante :Â Â L(Î¸)=p(x1...xN|Î¸)Â Â .= proba d'avoir x1...xN sachant \\Theta
 
 Â Î¸^Â avec un accent circonflexeÂ lorsqu'on parle d'unÂ estimateur (eet non de la valeur reelle, intrinseque)
 
@@ -408,36 +416,32 @@ vraisemblance d'un jeu d'observations (x1...xN) par rapport Ã  un modÃ¨le en
 
 * * *
 
-1.  MÃ©thode factorielle = la + connue ACP
-    
-2.  Clulstering = Classification non supervisÃ©e = la + connue k-means (K-moyennes)
-    
-
-  
+<details>
+<summary> <h3> C.1.  Méthode factorielle = la + connue ACP </h3> </summary>
 
 Factorielle :Â 
 
 ACPÂ  ( = EN PCA) = Principal component analysis
 
-*   Â  Â  recehche d'un (hyperplan) avec moment d'inertie max (Ã©talement des points) = axe orthogonal Ã  l'hyperplan = donne indication sur la variabilitÃ© =
+*   Â  Â  recehche d'un (hyperplan) avec moment d'inertie max (étalement des points) = axe orthogonal Ã  l'hyperplan = donne indication sur la variabilité =
     
 
 *   espace Rp de dimension p variables, contient Ni le nuage des individus
     
 
-*   Rechreche des corrÃ©lations entre variablesÂ 
+*   Rechreche des corrélations entre variablesÂ 
     
 
 *   espace Rn de dimension n individus, contient Np le nuage des variables
     
 
-De prÃ©fÃ©rence ACP normÃ©e (centrÃ©e rÃ©duite)
+De préférence ACP normée (centrée réduite)
 
 3 graphiques :Â 
 
 1.  1\. Pour l'objectif 1, ce sera la projection du nuage des individus NI sur les 2 premiers axes dâ€™inertie, câ€™est-Ã -dire sur le premier plan factoriel.
     
-2.  Le second sâ€™appelle le cercle des corrÃ©lations.
+2.  Le second sâ€™appelle le cercle des corrélations.
     
 3.  2\. Pour l'objectif 2, ce sera la projection du nuage des variables NK sur le premier plan factoriel.
     
@@ -446,21 +450,25 @@ De prÃ©fÃ©rence ACP normÃ©e (centrÃ©e rÃ©duite)
 
 combien de composantes = min (p nbr de varialbes et n-1 nombre individus)
 
-\=> eboulis des valeurs propres (classÃ©es en valeur dÃ©croissante)
+\=> eboulis des valeurs propres (classées en valeur décroissante)
 
 \=> frequent de n'analyser que le 1er plan (2 composantes). Critere du coude - reperer le # oÃ¹ le % inertie diminue + lentement. Criter de Kaiser (~contribution moyenen 100% / p)
 
+</details>
   
+<details>
+<summary> <h3> C.2. Clulstering = Classification non supervisée = la + connue k-means (K-moyennes)
+ </h3> </summary>
 
 k-meansÂ 
 
-k est un **hyperparamÃ¨tre** (c'est Ã  nous de l'optimiser, ce n'est pas l'algo qui va le proposer).Â 
+k est un **hyperparamètre** (c'est Ã  nous de l'optimiser, ce n'est pas l'algo qui va le proposer).Â 
 
   
 
   
 
-Trainig set vs testing set = 80% / 20% des donnÃ©es fournies
+Trainig set vs testing set = 80% / 20% des données fournies
 
   
 
@@ -474,13 +482,11 @@ Conversion de timestamp unix =Â Â [www.epochconverter.com](http://www.epochc
 
 Erreur lexicale => Technique du dictionnaire.
 
-Date => Format normalisÃ© ISO8601Â 1977-04-22T06:00:00Z.
+Date => Format normalisé ISO8601Â 1977-04-22T06:00:00Z.
 
-  
+</details>
 
-  
-
-</details> 
+</details>
 
 * * *
 
@@ -488,86 +494,48 @@ Date => Format normalisÃ© ISO8601Â 1977-04-22T06:00:00Z.
 <summary>
 ** Centrer-reduire, training split :** </summary>
 
-```import pandas as pd
-import numpy as np
-
+```python 
 from sklearn.preprocessing import StandardScaler
-```
-DÃ©finissons nos donnÃ©es :
+# Définissons nos donnéées :
 
-  
-
-\# Notre matrice de base :
-
+# Notre matrice de base :
 X = \[\[12,Â  Â  30,Â  Â  80,Â  -100\],Â  Â  \[-1000, 12,Â  Â  -23,Â  10\],Â  Â  \[14,Â  Â  1000,Â  0,Â  Â  0\]\]
-
-  
-
-\# Version numpy :
-
+# Version numpy :
 X = np.asarray(X)
-
-\# Version pandas :
-
+# Version pandas :
 X = pd.DataFrame(X)
-
-Avec Â pandasÂ  , on peut calculer la moyenne et l'Ã©cart-type de chaque dimensionÂ :
-
-  
-
-\# On applique la methode .describe() pour avoir la moyenne et la .std(), et la mÃ©thode .round(2) pour arrondir Ã  2 dÃ©cimales aprÃ¨s la virgule :
-
+# Avec Â pandasÂ  , on peut calculer la moyenne et l'écart-type de chaque dimensionÂ :
+# On applique la methode .describe() pour avoir la moyenne et la .std(), et la méthode .round(2) pour arrondir Ã  2 décimales après la virgule :
 X.describe()
-
-On peut ensuite Â«Â scalerÂ Â» nos donnÃ©es :
-
-  
-
-\# On instancie notre scaler :
-
+# On peut ensuite Â«Â scalerÂ Â» nos données :
+# On instancie notre scaler :
 scaler = StandardScaler()
-
-\# On le fit :
-
+# On le fit :
 scaler.fit(X)
-
-\# On l'entraine :
-
-X\_scaled = scaler.transform(X)
-
-\# On peut faire les 2 opÃ©rations en une ligne :
-
-X\_scaled = scaler.fit\_transform(X)
-
-\# On le transforme en DataFrame :
-
-X\_scaled = pd.DataFrame(X\_scaled)
-
-\# On peut appliquer la mÃ©thode .describe() et .round()
-
+# On l'entraine :
+X_scaled = scaler.transform(X)
+# On peut faire les 2 opérations en une ligne :
+X_scaled = scaler.fit\_transform(X)
+# On le transforme en DataFrame :
+X_scaled = pd.DataFrame(X\_scaled)
+# On peut appliquer la méthode .describe() et .round()
 X\_scaled.describe().round(2)
+# * Training split*(https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html)
+X_train, X_test, y_train, y_test = train_test_split( X, y, test_size=0.33, random_state=42)
+```
 
-* Training split*
-
-(https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html)
-`X_train, X_test, y_train, y_test = train_test_split(
-...     X, y, test_size=0.33, random_state=42)`
 Le 42 est un seed du random pour que ce soit toujours le même 
+
+</details>
 
 </details>
 
 ***
 
-<details>  
-
-
-<summary>
-<h2>Modeles prédictifs:</h2> </summary>
+<details> <summary><h2>Prédire </h2> </summary>
 
 <details>  
-<summary>
-<h3> M.1 Modeles predictifs linéaires = approximations supervisées </h3>
-</summary>
+<summary> <h3> M.1 Modeles predictifs linéaires = approximations supervisées </h3> </summary>
 
 - Si linéarité+normalité+indépendance (i.i.d.) => regression
     - recherche $β$ qui maximise la vraissemblance=  la probabilité de la distribution constatée ( $p(D|β)$ ) = minimise la somme des carrés des erreurs (MSE = RMSE)
@@ -762,6 +730,23 @@ print("accuracy {:.2f} time {:.2f}s".format(accuracy, elapsed))
     - jhkjhj
 
 </details>
+
+</details>
+
+<details>
+<summary> <h3> P.5 Mesurer la performance de la prévision </h3> </summary>
+
+Le compromis biais-variance : 
+![image](https://user-images.githubusercontent.com/7408762/200091906-6977561e-4cdf-4097-b45a-7775aebf0a5e.png)
+
+* biais d'induction = inductive bias = hypothèse à ajouter pour arriver à un "bon" modèle. Typique des "ill-posed problems" (problèmes mal posés). 
+* validation croisée = couper le jeu d'apprentissage en k parties (_k folds_) Chaque partie est utilisée comme jeu de test à son tour. 
+    * On peut faire LOO = Leave One Out = (k = N-1), mais préférable k= 5 ou 10 (pour temps de calcul)
+    * stratifier la validation croisée = maintenir proportion de chaque classe 
+    de la population dans les folds. 
+* Grid-search ou Line-Search pour tester différentes valeurs d'un hyperparamètre. 
+
+
 
 </details>
 
