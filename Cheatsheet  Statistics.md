@@ -491,42 +491,44 @@ Date => Format normalisé ISO8601Â 1977-04-22T06:00:00Z.
 * * *
 
 <details>  
-<summary>
-** Centrer-reduire, training split :** </summary>
+<summary> <h2> Préparer ses données en sets <h2></summary>
 
+
+**Centrer-reduire:**
+- centrer réduire est nécessaire dans presque tous les cas. 
+    - l'exception : la régression simple 
+- Autres transformations possibles ? 
 ```python 
 from sklearn.preprocessing import StandardScaler
-# Définissons nos donnéées :
+X = np.asarray(X) # Version numpy :
+X = pd.DataFrame(X) # Version pandas :
+X.describe().round( 2) # fonctionne slt avec la version pandas DF
 
-# Notre matrice de base :
-X = \[\[12,Â  Â  30,Â  Â  80,Â  -100\],Â  Â  \[-1000, 12,Â  Â  -23,Â  10\],Â  Â  \[14,Â  Â  1000,Â  0,Â  Â  0\]\]
-# Version numpy :
-X = np.asarray(X)
-# Version pandas :
-X = pd.DataFrame(X)
-# Avec Â pandasÂ  , on peut calculer la moyenne et l'écart-type de chaque dimensionÂ :
-# On applique la methode .describe() pour avoir la moyenne et la .std(), et la méthode .round(2) pour arrondir Ã  2 décimales après la virgule :
-X.describe()
-# On peut ensuite Â«Â scalerÂ Â» nos données :
 # On instancie notre scaler :
 scaler = StandardScaler()
-# On le fit :
-scaler.fit(X)
-# On l'entraine :
-X_scaled = scaler.transform(X)
-# On peut faire les 2 opérations en une ligne :
-X_scaled = scaler.fit\_transform(X)
-# On le transforme en DataFrame :
-X_scaled = pd.DataFrame(X\_scaled)
-# On peut appliquer la méthode .describe() et .round()
-X\_scaled.describe().round(2)
-# * Training split*(https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html)
-X_train, X_test, y_train, y_test = train_test_split( X, y, test_size=0.33, random_state=42)
+X_scaled = scaler.fit_transform(X) # on peut séparer le fit (calcul des mean et std) du transform (centrage et réduction)
+
+pd.DataFrame(X_scaled).describe().round(2)
 ```
 
-Le 42 est un seed du random pour que ce soit toujours le même 
+**Training sets:**: 
+- Base : "Don't train on the testing set !" : le split tout simple : 
+```python
+# * Training split*(https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html)
+X_train, X_test, y_train, y_test = train_test_split( X, y, test_size=0.33, random_state=42)
+# NB Le 42 est un seed du random pour que ce soit toujours le même split 
+```
+- ⁉️ Oui mais si j'ai besoin de tester pour choisir un hyperparamètre? ⇒ découper le training set en "folds" pour choisir un hyperparamètre = `GridSearch`
+- ⁉️ Oui mais si j'ai plusieurs modèles possibles ? ⇒ découper le training set en "folds" pour voir comment chaque modèle se comporte "en moyenne" avec une **valildation croisée**
+    * validation croisée = couper le jeu d'apprentissage en k parties (_k folds_) Chaque partie est utilisée comme jeu de test à son tour. 
+    * On peut faire LOO = Leave One Out = (k = N-1), mais préférable k= 5 ou 10 (pour temps de calcul)
+    * stratifier la validation croisée = maintenir proportion de chaque classe 
+    de la population dans les folds. 
+    * PEut être utiliser pour Grid-search ou Line-Search = pour tester différentes valeurs d'un hyperparamètre.
 
-</details>
+![image](https://scikit-learn.org/stable/_images/grid_search_workflow.png)
+
+
 
 </details>
 
@@ -571,6 +573,8 @@ Le 42 est un seed du random pour que ce soit toujours le même
             - $min_{β ∈ \mathbb{R}^{p+1}} (y−Xβ)^⊤(y−Xβ) + λ ((1-α)||β||_1 + α)||β||_2)$
             - => solution moins parcimonieuse, mais plus stable que LASSO
 
+![image](https://user.oc-static.com/upload/2019/06/10/15601584374984_LassoRidge.png)
+
 - Evaluer la performance d'une régression  
     - Avec ordre de grandeur : MSE et RMSE = mean squared error (mean of RSS = residual sum of squares = somme des carrés des résidus)
     - Sans ordre de grandeur : RMSLE et R^2
@@ -581,6 +585,23 @@ Le 42 est un seed du random pour que ce soit toujours le même
 </details>
 <details>
 <summary> <h3> M.2 Modèles prédictifs linéaires pour classification </h3> </summary>
+
+- la matrice de confusion `metric.confusion_matrix(y_true, y_predict)` : 
+
+| Confusion Matrix  |   True -      | True +          | 
+|:----------------- |:-------------:|:---------------:|
+| Predicted -       | True negative | False negative (type II)  |
+| Predicted +       | False positive (type I) | True positive  |
+
+- mesures à connaitre: 
+    - rappel (_recall_) = sensibilité (_sensitiviy_) = vrais positifs prédits en %des vrais positifs 
+    - precision = vrais positifs prédits en %des positifs prédits
+    - F-score = moyenne harmonique rappel & precision
+    - spécificité = vrais négatifs prédits en % des vrais négatifs = sensibilité sur les négatifs
+    - AUROC = area under ROC curve (1 pour classifieur parfait, 0.5 pour classifieur aléatoire)
+
+ici mettre image courbe ROC sensibilité vs 1-speçificité
+
 
 - regression logistique = pour classification binaire
     - classification binaire =  $y$ vaut 0 ou 1.
@@ -634,8 +655,7 @@ Le 42 est un seed du random pour que ce soit toujours le même
     - Méthodes séquentielles : **boosting**
 
 <details>
-<summary>
-- **Bagging** = Bootstrap aggregation </summary>
+<summary> **Bagging** = Bootstrap aggregation </summary>
     - Moyenne pour prédiction, vote majoritaire pour classification
     - 
 ```(python)
@@ -660,7 +680,7 @@ plot_2d_separator(bagging, X_train, fill=True, ax=axes[-1, -1],
                                     alpha=.4)
 axes[-1, -1].set_title("Bagging")
 discrete_scatter(X_train[:, 0], X_train[:, 1], y_train)
-```
+``` 
 
 </details>
 
@@ -736,16 +756,19 @@ print("accuracy {:.2f} time {:.2f}s".format(accuracy, elapsed))
 <details>
 <summary> <h3> P.5 Mesurer la performance de la prévision </h3> </summary>
 
+* Il y a de multiples scores de performance (si 'score", alors + haut = mieux, si "error", l'inverse), [liste ici](https://scikit-learn.org/stable/modules/model_evaluation.html), les classiques: 
+    * Pour les régressions : mean_squared_error, mean_absolute_percentage_error, r2_score
+    * Pour les classifications : accuracy, precision (no false positive), recall (no missing positive), F1 (une moyenne entre precision et recall)
+    * Pour les regroupements (clustering): completeness, homogeinity, mutual information
+
+
 Le compromis biais-variance : 
 ![image](https://user-images.githubusercontent.com/7408762/200091906-6977561e-4cdf-4097-b45a-7775aebf0a5e.png)
 
 * biais d'induction = inductive bias = hypothèse à ajouter pour arriver à un "bon" modèle. Typique des "ill-posed problems" (problèmes mal posés). 
-* validation croisée = couper le jeu d'apprentissage en k parties (_k folds_) Chaque partie est utilisée comme jeu de test à son tour. 
-    * On peut faire LOO = Leave One Out = (k = N-1), mais préférable k= 5 ou 10 (pour temps de calcul)
-    * stratifier la validation croisée = maintenir proportion de chaque classe 
-    de la population dans les folds. 
-* Grid-search ou Line-Search pour tester différentes valeurs d'un hyperparamètre. 
-
+ 
+* Pour une prévision quanti : on calcule un MSE / RMSE ou un `r2_score` 
+* Pour une classification : `accuracy` =  % des classes correctes
 
 
 </details>

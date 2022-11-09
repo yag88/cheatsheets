@@ -2,14 +2,13 @@
 
 * * *
 
-<details>
-<summary> <h2> 1.  Python general cheatsheet </h2></summary>
+<h2> 1.  Python general cheatsheet </h2>
     
 
 see also 2-pager  [Python3 cheatsheet - perso.limsi.fr](evernote:///view/6367254/s57/e1f90f88-1307-423b-80b8-482d4c4b5825/e1f90f88-1307-423b-80b8-482d4c4b5825/)
 
 <details>
-<summary> <h3>### code formating , I/ O </h3></summary>
+<summary> <h3>Code formating , I/ O </h3></summary>
 
 indentation = [Landin's](https://en.wikipedia.org/wiki/Peter_Landin) pseudo law: Treat the indentation of your programs as if it determines the meaning of your programs… Because sometimes it does.
 
@@ -25,133 +24,105 @@ input("this is a prompt message") # will return a string
 
 x = int(input("please enter an integer")) # will return ValueError if input is not an int
 
-There is no difference between input in Python 3 and raw\_input in Python 2 except for the keywords.
+There is no difference between input in Python 3 and raw_input in Python 2 except for the keywords.
 
 \# this is a comment There is no multi-line comment. 
 
 '''' This is a [docstring](https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html)  . Using docstring in place of multiline comment is possible but not recommended.
 </details>
 
-Operators
+<details>
+<summary> <h3>- Operators and variables </h3></summary>
+- Operators 
+    * +  - / \* % (mod aka euclidian remainder)  // (euclidian division) \*\* (power, also pow(a, b) ) 
+    * `round(3.14)`
+    * `<  >  <=  >=  ==`
+    * `(a // b, a % b)`
 
-+  - / \* % (mod aka euclidian remainder)  // (euclidian division) \*\* (power, also pow(a, b) ) 
-
-round(3.14)
-
-<  >  <=  >=  ==
-
-(a // b, a % b).
-
-
-
-Variables
-
-assignation with =  and variable names must start by a letter or by \_ . Letters, numbers, and underscores will work. Use camelCase, long and explicit variable names. 
-
+- Variables
+    * assignation with =  and variable names must start by a letter or by _ . Letters, numbers, and underscores will work. Use camelCase, long and explicit variable names. 
+```python
 print("texte1 ", variable) = print(f"texte2 {variable}.") = print("texte3 {} ".format(variable))
-
 del myVariable # to remove a (global/local) variable from memory
 
 round numbers considered integer, with a decimal 3.0 becomes float.
+```
 
-dynamic casting : existing variable changes type if assigned value of incompatible type.
-
-typecasting = force into a different type. Use the name of the type as typecasting function : 
-
-int() float() str()
-
+    * dynamic casting : existing variable changes type if assigned value of incompatible type.
+    * typecasting = force into a different type. Use the name of the type as typecasting function : `int() float() str()`
+```python
 interets = int(interets) #converts in place the variable into an integer via dynamic casting
-
 type() # to get type of a variable (as a string)
 
-
-
 from math import sqrt, pi, exp #fonctions de math de base à importer
+```
+</details>
 
+<details>
+<summary> <h3>Strings</h3></summary>
 
-
-
-
-Strings
-
-with double quotes or single quotes (either way is acceptable, typically single-quotes for short strings).
-
-the triple-double-quotes allow to type a whole text on several lines, including returns equivalent to \\n.
-
-f-string is a formated string (with a variable inside marked by {}). any string wih {} has a method .format
-
-concatenate with + 
-
-multiply same text 10 time with 'copy '\* 10
-
-single quotes can be included in strings if they use double quotes.
-
+- **Strings**
+    * with double quotes or single quotes (either way is acceptable, typically single-quotes for short strings).
+    * the triple-double-quotes allow to type a whole text on several lines, including returns equivalent to \\n.
+    * `f-string` is a formated string (with a variable inside marked by {}). any string wih {} has a method .format
+    * concatenate with `+` 
+    * multiply same text 10 time with 'copy '* 10
+    * single quotes can be included in strings if they use double quotes.
+```python
 var1 = 2
-
 var2 = "one and two"
-
 text = "text of the message with {} formatted variables, {}"
-
 print(text.format(var1, var2))
-
-in Python any empty list, string, or tuple is [falsy](https://docs.python.org/3/library/stdtypes.html#truth-value-testing)
-
-usefull methods for strings : 
-
-*   upper()  lower()  capitalize() (title(): formating case
+```
+    * in Python any empty list, string, or tuple is [falsy](https://docs.python.org/3/library/stdtypes.html#truth-value-testing)
+    * usefull methods for strings : 
+        * `upper()  lower()  capitalize() title()`: formating case
+        *   replace(old, new)  
+        *   find(chaîne) returns -1 (absent) or indice of 1st occurence ;  in true or false;
+        *   .startwith(myInitialText) return true or false
     
-*   replace(old, new)  
-    
-*   find(chaîne) returns -1 (absent) or indice of 1st occurence ;  in true or false;
-    
-*   .startwith(myInitialText) return true or false
-    
+</details>
 
+***
 
+<details>
+<summary> <h3> List, tuple, set and dict </h3></summary>
 
-[list, tuple, set and dict](https://docs.python.org/3/tutorial/datastructures.html)
+- [list, tuple, set and dict](https://docs.python.org/3/tutorial/datastructures.html)
 
-myList = \[ value 1, value2\]
-
+```python
+myList = [ value 1, value2]
 myDict = {"Georges Dupont": 10000, "Luc Martin": 150, "Lucas Anderson": 300, "Alexandre Petit": 1800.74}
-
 myTuple = (1, 'pomme') # immutable !!
 
-#NB: array is not native Python, but comes from Numpy package/ array module
+dict['mykey]
+```
 
-list = general table, mixes heterogeneous types including list of list, 
+- array is not native Python, but comes from Numpy package/ array module
+- list = general table, mixes heterogeneous types including list of list, 
+    -  index 0 for first, -1 for last, negative indices cycle back, [:2] from 0(first) to 2. 
+    - lists are ordered, mutable, can contain duplicates & heterogeneous types   
 
-    index 0 for first, -1 for last, negative indices cycle back, \[:2\] from 0(first) to 2. 
-
-    lists are ordered, mutable, can contain duplicates & heterogeneous types   
-
-⚠ range returns an immutable sequence type (in Python3), not a list
-
+- ⚠ range returns an immutable sequence type (in Python3), not a list
+```python
 force a list with : \`\`\`list(range(4))\`\`
-
 dict = access by key instead of index
-
 tuple = immutable list, used to return multiples values in a function. 
 
-Also : 
-
+# Also : 
 from enum import Enum #another type of data to chose in a fixed enum
-
 class Strategie(Enum):
-
     CHANGER = 1
-
     GARDER = 2
 
 from array import array #another type for math calculation - see Numpy
+``` 
 
-
-
-functions for all iterables/iterators: 
+Functions for all iterables/iterators: 
 
 *   liste.insert(myindex, myvalue)  ;
     
-*   .append(myvalue) .extend(my\_other\_list)  to append / concatenate;
+*   .append(myvalue) .extend(my_other_list)  to append / concatenate;
     
 *   r.remove(myvalue)  finds and remove first occurence;
     
@@ -160,7 +131,7 @@ functions for all iterables/iterators:
 *   mot clé del(myindex)  // for Dict =  .pop(myKey)
     
 
-del liste\[3\] # \[4, 5, 1, 3\]
+del liste[3] # [4, 5, 1, 3]
 
 len(liste)
 
@@ -170,7 +141,7 @@ a, b = (1, 'pomme') # shorcut to open a tuple
 
 Booleans
 
-if not my\_list: print('List is empty!')  # Any empty list, string, or tuple is falsy
+if not my_list: print('List is empty!')  # Any empty list, string, or tuple is falsy
 
 *   and ; or ; not() ; \== != < <= >  >= ;
     
@@ -187,79 +158,57 @@ from sys import argv
 
 first, second = ARGV
 
+</details>
 
-
+<details><summary> Functions and loops </summary>
 Function def .... : 
 
-def print\_two(\*args): #here args is a list
-
+```python	
+def print_two(*args): #here args is a list
     arg1, arg2 = args
-
     print(f"arg1: {arg1}, arg2: {arg2}")
 
-
-
-def calcul\_IMC(poids = 60, taille = 1.70):
-
-    imc = poids / taille\*\*2
-
+def calcul_IMC(poids = 60, taille = 1.70):
+    imc = poids / taille**2
     return(imc)
+``` 
 
+* Can return multiple values with `return a, b, c`
 
-
-calcul\_IMC(poids = float(input("Quel poids (en kg) ? ")) ,
-
-        taille = float(input("Quelle taille (en metres) ? ")))
-
-Can return multiple values with ; 
-
-    return a, b, c
-
-
-
-Conditions if ... : ... elif ... : ... else: ...
-
+Conditions `if ... : ... elif ... : ... else: ...`
+```python
 if len(nom) > 0:
-
     print("Hello", nom, "!")
-
-**elif** len(nom) <10:
-
+elif len(nom) <10:
     xxxxx
-
 else:
-
     print("Hello World !")
+``` 
 
-True, False
+* True, False
+    * any empty list, string, or tuple is [falsy](https://docs.python.org/3/library/stdtypes.html#truth-value-testing)
+    * No switch statement, [use dict instead](https://www.evernote.com/l/ADkVrRw5rpFGf5C_wuRk_yk7qeaRyAEfIHw/). 
 
-any empty list, string, or tuple is [falsy](https://docs.python.org/3/library/stdtypes.html#truth-value-testing)
-
-No switch statement, [use dict instead](https://www.evernote.com/l/ADkVrRw5rpFGf5C_wuRk_yk7qeaRyAEfIHw/). 
-
-
-
-Loops
-
+* Loops
+```python
 for element in myStringOrMyList:
-
 for i in range(0,nb): #borne droite ouverte !!
-
 for element in range(start,step,endPlusOne):  #shortcut range(1000) = range (0,1,999)
-
-[https://docs.python.org/3/reference/compound\_stmts.html?highlight=while#for](https://docs.python.org/3/reference/compound_stmts.html?highlight=while#for)
+```
+[https://docs.python.org/3/reference/compound_stmts.html?highlight=while#for](https://docs.python.org/3/reference/compound_stmts.html?highlight=while#for)
 
 while condition :
 
 Interrupt loop with continue (next loop) or break loop
 
-
+</details>
 
 modules = classes+variables+functionsDS | librairies Python pour Data Science-2 - Initiez-vous à la librairie Numpyark
 
+<details><summary> <h3> modules </h3></summary>
 module = 1 file with classes+variables+fnctions
 
-library or package  = set of files including an \_\_init\_\_.py
+library or package  = set of files including an __init__.py
 
 pip #Package Installer for Python
 
@@ -310,7 +259,7 @@ write('stuff') – Writes “stuff” to the file. target.write(line1) target.wr
 
 [seek](https://docs.python.org/3/library/io.html?highlight=seek#io.IOBase.seek)(0) – Move the read/write location to the beginning of the file.
 
-    print(line\_count, f.readline()) print can read a specific line number
+    print(line_count, f.readline()) print can read a specific line number
 
 
 
@@ -318,13 +267,13 @@ Doc - manual
 
 in python: 
 
-pydoc name\_of\_function
+pydoc name_of_function
 
-help(name\_of\_function)
+help(name_of_function)
 
 on Windows Powershell: 
 
-python -m pydoc name\_of\_function
+python -m pydoc name_of_function
 
 
 * * *
@@ -333,7 +282,7 @@ python -m pydoc name\_of\_function
 
 revuiew Euler023 ; 
 
-\_\_\_
+___
 
 
 
@@ -350,9 +299,9 @@ revuiew Euler023 ;
 
 
 
-from string import ascii\_lowercase
+from string import ascii_lowercase
 
-\>>> for c in ascii\_lowercase:
+\>>> for c in ascii_lowercase:
 
 
 
@@ -360,16 +309,17 @@ from string import ascii\_lowercase
 
   
 </details>
+
 * * *
 
   
-
+***
   
 
 ## 2.Python for Data Science
 
 <details>  
-<summary> <h3> 2.1. Environnement Dev & packages à connaitres </h3> </summary>
+<summary> <h3> 2.1. Environnement Dev & packages à connaitre </h3> </summary>
 * Link to courses : [DS | Initiez-vous à Python pour l'analyse de données - OpenClassrooms](evernote:///view/6367254/s57/9671058b-017b-483c-b085-27aa9676a0d9/9671058b-017b-483c-b085-27aa9676a0d9/)
 
 * numpy et scipy pour les calculs (numpy => arrays)
@@ -382,7 +332,7 @@ from string import ascii\_lowercase
 
 * Tensorflow et PyTorch pour le deep learning
 
-*   [Anaconda](https://www.anaconda.com/distribution/) : includes Jupyter Notebook. Launch from terminal with jupyter notebook  or (from working dir) jupyter notebook my\_notebook.ipynb
+*   [Anaconda](https://www.anaconda.com/distribution/) : includes Jupyter Notebook. Launch from terminal with jupyter notebook  or (from working dir) jupyter notebook my_notebook.ipynb
     
 *   [Google Colaboratory](https://colab.research.google.com/?utm_source=scs-index) : full online
 
@@ -399,7 +349,7 @@ Notebook = includes executable code "cellules FR"
 
 *    Code \= basic cell // heading = obsolete // Raw = to control document formating when converting
     
-*   Markdown \[m\] \= basic formating info. 
+*   Markdown [m] \= basic formating info. 
 
 * Mise en forme des outputs de cellules : [Jupyter](https://jupyterbook.org/en/stable/content/code-outputs.html) ; [Jupyter2 MyST](https://jupyterbook.org/en/stable/reference/cheatsheet.html#myst-cheatsheet-code-cell-tags) ; formatting in Colab [relies on Jupyter, may or may not work](https://colab.research.google.com/notebooks/snippets/advanced_outputs.ipynb) 
 
@@ -414,11 +364,13 @@ Notebook = includes executable code "cellules FR"
 
 </details>
 
+***
+
 <details>
 <summary> <h3> 2.3. Markdown cheatsheet </h3></summary> 
 
 
-*   \* or \_ italic  \*\* or \_\_ bold ;
+*   \* or _ italic  \*\* or __ bold ;
 *   \# heading1 ## heading2 (and so on)
 *   \> >> to indent text (same as <blockquote> )
 *   \-  (double space) for bullet point, tab to indent
@@ -433,6 +385,8 @@ See [Reminder Markdown for Jupyter](https://fr.acervolima.com/cellule-markdown-d
 [GitHub Markdown docs](https://docs.github.com/en/get-started/writing-on-github)
 </details>
 
+***
+
 <details>
 <summary> <h3> 2.4. Module Random  </h3></summary> 
 
@@ -441,120 +395,77 @@ See [Reminder Markdown for Jupyter](https://fr.acervolima.com/cellule-markdown-d
 
 </details>
 
-
+***
 
 <details> 
 <summary> <h3> 2.5. Numpy and its arrays (=matrices)  </h3></summary>
 
-À chaque fois que vous vous trouvez en train d'utiliser une boucle pour effectuer une opération en Python, demandez-vous si cette opération ne peut pas s'accomplir grâce à Numpy sans boucle.
+- À chaque boucle pour effectuer une opération en Python, demandez-vous si cette opération ne peut pas s'accomplir grâce à Numpy sans boucle.
 
-arrayarrays have same type (unlike lists)
+- **numpy TYPES** :  `array` and 'numpy' arrays have homogeneous type (unlike native python lists)
+- NumPy supports a much greater variety of [primitive numerical types](https://numpy.org/doc/stable/user/basics.types.html) than Python does (similar to C types).
+- np arrays is `ndarray` , can be 1 or 2 or up to 32-dimensional. 
+```python
+import numpy as np
+import array as arr
 
-import numpy as np _#alternative : import array as arr_
+array_of_int = arr.array("i", [3, 6, 9, 12]) #array module requires type declaration (here "i" means integer)
+array_heterog = np.array(["numbers", 3, 6, 9, 12]) #numpy module cast the list (here to string)
+```
 
-array\_of\_int = arr.array("i", \[3, 6, 9, 12\]) #array module requires same type (here "i" means integer)
+- array = must be declared (created), are more efficient than lists for data storage, can handle math operations
+    -     index 0 for first, -1 for last, negative indices cycle back, [:2] from 0(first) to 2(excluded). 
+- ⚠ vecteurs numpy sont (200,) au lieu de (200,1). Cela permet de les voir soit comme ligne, soit comme colonne. Mais parfois il faut tout de même les `np.reshape( myArray, myShape)` . 
 
-array\_heterog = np.array(\["numbers", 3, 6, 9, 12\])
-
-array = must be declared (created), are more efficient than lists for data storage, can handle math operations
-
-    index 0 for first, -1 for last, negative indices cycle back, \[:2\] from 0(first) to 2(excluded). 
-
-⚠ vecteurs numpy sont (200,) au lieu de (200,1). Cela permet de les voir soit comme ligne, soit comme colonne. Mais parfois il faut tout de même les \`\`\`reshape\`\`\` . 
-
-Création d'un array Numpy: 
-
-  
-
+- **Création d'un array Numpy**: 
+```python
 np.array(myList) # force la conversion le cas échéant, crée des array 1xn ou nxp (avec liste de listes)
-
 np.array(myList, dtype = "float32")
 
-  
-
-Les tableaux remplis : 
-
+# arrays pré-remplis : 
 np.zeros(10, dtype = int) #tableau 1x10
-
-np.ones((3,50), dtype = float)
-
+np.ones((3,50), dtype = float) #float is the default for all those creations
 np.full((4,4), 3.14)
-
 np.eye(3) #la matrice identité
-
+np.empty([2, 2], dtype=int) # a éviter, les valeurs ne sont pas initialisées (donc aléatoires)
 np.linspace(start= 0 , stop = 1, num = 11)  #un sequence espacée linéairement avec num poteau (num-1 intervalles)
-
 np.arange(start= 0 , stop = 1, step = 0.1) #une autre séquence, presque comme linspace (mais n'inclut par la borne sup)
-
 np.random.rand(3,5) #une matrice aléatoire 3x5 - aussi avec random.random et random.normal
-
-  
-
-myArray.shape #renvoie une liste de 2 élements \[lignes,colonnes\]
-
-numpy.shape -> tuple with size of table .reshape -> change size
-
-  
-
-  
-
-Connaitre le tableau : 
+np.fromfunction(f, (5, 4), dtype=int) # où f est une fonction à 2 arguments 
+```
+- **Contenu** du array et slicing: 
+```python 
+myArray.shape #renvoie une liste de 2 élements [lignes,colonnes]
+np.shape # -> tuple with size of table 
+np.reshape # -> change size, also myArray.ravel() to flatten
 
 myArray.ndim #nb de dimensions
-
-myArray.shape
-
 myArray.size #nombre total éléments = n x p
 
 myArray.dtype
+myArray[1,3:14:2] #slicing = start:end:step => 3 to 14 by a step of 2
+myArray[::-1] #reverse of array
+myTable[1,:] #la première ligne
 
-  
-
-myArray\[1,3:14:2\] #slicing = start:end:step => 3 to 14 by a step of 2
-
-myArray\[::-1\] #reverse of array
-
-myTable\[1,:\] #la première ligne
-
-Manipulations de matrices : 
-
+# Manipulations de matrices : 
 np.sum(myMatrix,axis = 0) # 0 sum des lignes, 1 sommes des colonnes, pas d'axis -> somme totale
-
-np.mean(myArray)
-
-np.var(myArray) #variance
-
-np.argmin(myArray) #index du min
-
-np.percentile(....) ??
-
+np.sum, np.std, np.var, np.argmin np.argmax np.percentile /// pour appliquer sur colonnes / lignes
+np.percentile(....) # ??
+``` 
   
-
+```python
 np.concatenate(myTable1, myTable2) # use rather np.vstack(myListOfArrays) and np.hstack(myListOfArrays)
-
 np.where(myArrays > 3) #renvoit un extrait - quel type et taille ????
-
 no.newaxis ?!?!?
+b = np.arange(3)[:, np.newaxis] #cf cours python pour DS3-2.1
 
-b = np.arange(3)\[:, np.newaxis\] #cf cours python pour DS3-2.1
-
-  
-
-LA PUISSANCE DE NUMPY, c'est de parcourir des tableaux SANS BOUCLE for: 
-
-\+ - \* / // #division entiere arrondie
-
+# LA PUISSANCE DE NUMPY, c'est de parcourir des tableaux SANS BOUCLE for: \+ - \* / // #division entiere arrondie
 np.abs(myArray)
-
 np.exp(myArray) # log, etc.
-
 myArrayOfBool = myArrayOfInt > 3
+```
+- avec BROADCASTING (_smaller array 'broadcast' across larger array'), on peut faire des opérations sur des tableaux de taille différente 
 
-  
-
-np.sum, np.std, np.argmin np.argmax np.percentile /// pour appliquer sur colonnes / lignes
-
-avec BROADCASTING, on peut faire des opérations, y compris sur des tableaux de taille différente 
 </details>
 
   
@@ -596,7 +507,7 @@ titanic.describe(include="all")  # (from np) donne des stats (count, mean, std, 
   
 * Basic manipulation of DF / Series
 ```python
-df.columns  # df.columns.difference(\[''\]) remet les colomnes par ordre alphabe'tique (pourquoi ?!?)
+df.columns  # df.columns.difference(['']) remet les colomnes par ordre alphabe'tique (pourquoi ?!?)
 myDF["Ventre"] myDF.Ventre  # 3 methodes pour extraire unes colonne (objet pandas.Series )
 myDF.iloc[:,0] # afficher la première colonne
 myDF[['myColumn1', 'myColumn2']] # attention liste de noms de colonnes
@@ -608,9 +519,9 @@ df.loc[:, ['PClass','Name']]
 mydf.columns.difference(['Age','SexCode']) # afficher toutes les colonnes sauf ... 
 # la méthode columns.difference remet les colonnes par ordre alphabetique (?!?!) 
 
-mydf.drop\_duplicates() # voir aussi unique pour la liste
+mydf.drop_duplicates() # voir aussi unique pour la liste
 
-#To print, change display options with pandas.set\_options() and pandas
+#To print, change display options with pandas.set_options() and pandas
 get_options()
 pandas.set_option('display.max_rows', None)
 
@@ -621,27 +532,27 @@ myDF.append(myOtherDF)
 \
 On manipule un DF: 
 
-for ind\_ligne, contenu\_ligne in famille\_panda\_df.iterrows(): #envoie (à chaque itération de la boucle for) un tuple dont le premier élément est l'index de la ligne, et le second le contenu de la ligne en question 
+for ind_ligne, contenu_ligne in famille_panda_df.iterrows(): #envoie (à chaque itération de la boucle for) un tuple dont le premier élément est l'index de la ligne, et le second le contenu de la ligne en question 
 
   
 
-masque = famille\_panda\_df\["ventre"\] == 80 #renvoi une série de booléens, qui peut servir de masque
+masque = famille_panda_df["ventre"] == 80 #renvoi une série de booléens, qui peut servir de masque
 
-df\[df.PClass != "1st"\]  # autre exemple de masque
+df[df.PClass != "1st"]  # autre exemple de masque
 
-~ df.PClass.isin(\['1st', '2nd'\]) # autre exemple de masque - le ~ est une negation
+~ df.PClass.isin(['1st', '2nd']) # autre exemple de masque - le ~ est une negation
 
-myDF\[myDF.PClass.isna()\] # also .notna()
+myDF[myDF.PClass.isna()] # also .notna()
 
   
 
-famille\_panda\_df\[~masque\] #inversion du masque
+famille_panda_df[~masque] #inversion du masque
 
 \# ======= SORTING ==========
 
-df.Age.sort\_values(ascending=False) # default ascending=True
+df.Age.sort_values(ascending=False) # default ascending=True
 
-df.sort\_values(by = \['PClass','Age'\], ascending=\[True,False\]) 
+df.sort_values(by = ['PClass','Age'], ascending=[True,False]) 
 
   
 
@@ -673,7 +584,7 @@ Bon nombre de fonctions Pandas, telles que  dropna  ,  fillna  ,  drop  , etc ac
 
   
 
-titanic.pivot\_table('survived', index='sex', columns='class', aggfunc="sum")
+titanic.pivot_table('survived', index='sex', columns='class', aggfunc="sum")
 
   
 
@@ -691,7 +602,7 @@ pd.concat(myDF1, myDF2) #par défaut vstack, se change avec arg axis =1
 
   
 
-df3 = pd.merge(df1, df2, left\_on= "employee", right\_on= "emp\_name")
+df3 = pd.merge(df1, df2, left_on= "employee", right_on= "emp_name")
 
   
 
@@ -707,7 +618,7 @@ import numpy as np
 
 myDF.Age.mean()  # also median() max() min() std() var() 
 
-df.Age.quantile(\[.1, .5\]) #calculates the quantiles in the list
+df.Age.quantile([.1, .5]) #calculates the quantiles in the list
 
 df.Age.quantile(np.linspace(start = 0, stop = 1, num= 11)) # for 10 deciles
 
@@ -717,7 +628,7 @@ titanic.describe(include="all")  # donne des stats (count, mean, std, quartiles 
 
 #in cludes all would include any type, not just nbers. To exclude numbers : 
 
-df.describe(exclude=\[np.number\])  # df.describe(percentiles=np.linspace(start = 0, stop = 1, num= 11))
+df.describe(exclude=[np.number])  # df.describe(percentiles=np.linspace(start = 0, stop = 1, num= 11))
 
   
 
@@ -726,47 +637,26 @@ df.describe(exclude=\[np.number\])  # df.describe(percentiles=np.linspace(start 
 <details>
 <summary> <h3> 2.7. Matplotlib et Seaborn  </h3></summary> 
 
-%matplotlib inline # afficher les graphiques dans la continuité du code, pas dans fenêtre à part
-
+```python
 import matplotlib.pyplot as plt
-
-  
-
+%matplotlib inline # afficher les graphiques dans la continuité du code, pas dans fenêtre à part
 plt.style.use('seaborn-whitegrid')
 
-  
-
-  
-
 #toutes ces fonctions plot renvoient un objet (conteneur)  avec tout l'objet
-
 plot = plt.plot(myListOfValues) #lignes
-
 plt.scatter(myListX, myListY) #scatter ne relie pas les points. C'est pourquoi on a souvent : 
-
 plt.scatter(range(100),myListOf100Values)
-
 plt.bar(myListOfLabels, myListOfValues)
-
 plt.hist(myArray) #qu'on peut regrouper en "bin=100" paquests de 100
-
-  
-
-  
 
 #si on crée initialement une figure: 
 
 myFigure = plt.figure() 
-
 \# conteneur avec tous les objets ensuite tous les plot, scatter etc s'appliquent à cette figure
-
 myAxes = plt.axes()
-
 x = np.linspace(0, 10, 1000)
-
 myAxes.plot(x, np.sin(x));
-
-  
+```
 
 Un exemple compliqué : 
 
@@ -790,7 +680,7 @@ plt.plot(x, np.sin(x - 3), color='#FF0000', linestyle='dotted', label='rouge')
 
 \# Les limites des axes, essayez aussi les arguments 'tight' et 'equal'
 
-plt.axis(\[-1, 11, -1.5, 1.5\]);
+plt.axis([-1, 11, -1.5, 1.5]);
 
 plt.title("Un exemple de graphe")
 
@@ -813,96 +703,60 @@ plt.errorbar(x, y, yerr=dy, fmt='o', color='black', ecolor='lightgray', elinewid
   
 
 Quelques exemples : 
-
-print(plt.style.available\[:6\])
-
-\# Notez la taille de la figure (en quelle unité ? nb de caracteres?)
-
+```python
+print(plt.style.available[:6])
+# Notez la taille de la figure (en quelle unité ? nb de caracteres?)
 fig = plt.figure(figsize=(12,8))
 
 for i in range(6):
-
 \# On peut ajouter des sous graphes ainsi
-
-fig.add\_subplot(3,2,i+1)
-
-plt.style.use(plt.style.available\[i\])
-
+fig.add_subplot(3,2,i+1)
+plt.style.use(plt.style.available[i])
 plt.plot(x, y)
-
 \# Pour ajouter du texte
-
-plt.text(s=plt.style.available\[i\], x=5, y=2, color='red')
-
-  
+plt.text(s=plt.style.available[i], x=5, y=2, color='red')
 
 \# On peut aussi tout personnaliser à la main
-
 x = np.random.randn(1000)
-
 plt.style.use('classic')
-
 fig=plt.figure(figsize=(5,3))
-
 ax = plt.axes(facecolor='#E6E6E6')
 
 \# Afficher les ticks en dessous de l'axe
-
-ax.set\_axisbelow(True)
-
-\# Cadre en blanc
-
+ax.set_axisbelow(True)
+\\# Cadre en blanc
 plt.grid(color='w', linestyle='solid')
-
 \# Cacher le cadre
-
 \# ax.spines contient les lignes qui entourent la zone où les
-
-\# données sont affichées.
+# données sont affichées.
 
 for spine in ax.spines.values():
-
-spine.set\_visible(False)
+    spine.set_visible(False)
 
 \# Cacher les marqueurs en haut et à droite
-
-ax.xaxis.tick\_bottom()
-
-ax.yaxis.tick\_left()
-
+ax.xaxis.tick_bottom()
+ax.yaxis.tick_left()
 \# Nous pouvons personnaliser les étiquettes des marqueurs
-
 \# et leur appliquer une rotation
-
-marqueurs = \[-3, -2, -1, 0, 1, 2, 3\]
-
-xtick\_labels = \['A', 'B', 'C', 'D', 'E', 'F'\]
-
-plt.xticks(marqueurs, xtick\_labels, rotation=30)
+marqueurs = [-3, -2, -1, 0, 1, 2, 3]
+xtick_labels = ['A', 'B', 'C', 'D', 'E', 'F']
+plt.xticks(marqueurs, xtick_labels, rotation=30)
 
 \# Changer les couleur des marqueurs
-
-ax.tick\_params(colors='gray', direction='out')
-
-for tick in ax.get\_xticklabels():
-
-tick.set\_color('gray')
-
-for tick in ax.get\_yticklabels():
-
-tick.set\_color('gray')
-
-\# Changer les couleur des barres
+ax.tick_params(colors='gray', direction='out')
+for tick in ax.get_xticklabels():
+    tick.set_color('gray')
+for tick in ax.get_yticklabels():
+    tick.set_color('gray')
+\\# Changer les couleur des barres
 
 ax.hist(x, edgecolor='#E6E6E6', color='#EE6666');
-
-  
-
+```
   
 
 Cf cheatsheet Matplotlib Jupyter recommandée par le cours : 
 
-[https://nbviewer.org/urls/gist.githubusercontent.com/Jwink3101/e6b57eba3beca4b05ec146d9e38fc839/raw/f486ca3dcad44c33fc4e7ddedc1f83b82c02b492/Matplotlib\_Cheatsheet](https://nbviewer.org/urls/gist.githubusercontent.com/Jwink3101/e6b57eba3beca4b05ec146d9e38fc839/raw/f486ca3dcad44c33fc4e7ddedc1f83b82c02b492/Matplotlib_Cheatsheet) 
+[https://nbviewer.org/urls/gist.githubusercontent.com/Jwink3101/e6b57eba3beca4b05ec146d9e38fc839/raw/f486ca3dcad44c33fc4e7ddedc1f83b82c02b492/Matplotlib_Cheatsheet](https://nbviewer.org/urls/gist.githubusercontent.com/Jwink3101/e6b57eba3beca4b05ec146d9e38fc839/raw/f486ca3dcad44c33fc4e7ddedc1f83b82c02b492/Matplotlib_Cheatsheet) 
 
   
 
