@@ -1,4 +1,4 @@
-# 📌Cheatsheet | Statistics
+# 📌Cheatsheet | Statistics DataScience
 
 
 <details><summary><h2>Vocabulaire</h2></summary>
@@ -43,6 +43,19 @@
 </details>
 
 ***
+
+<h2> Using the tools : JupyterNB, Colab </h2>
+
+<details><summary><h2> Colab </h2></summary>
+
+### [dedicated cheatsheet on Colab](https://colab.research.google.com/drive/13IO3-gfyS9mSPuzAo6-wsYBUOVpxb_va?usp=sharing)
+- **help** on all shortcuts => Ctrl  M  H
+- create a new cell below/ above 'ctrl M B'  / `ctrl M A`
+- convert a text cell to code / to text ctrl M  Y / ctrl M M
+- run current cell 'ctrl + enter'
+- delete a cell ctrl+m d
+
+</details>
 
 <details><summary><h2> Nettoyer </h2></summary>
 
