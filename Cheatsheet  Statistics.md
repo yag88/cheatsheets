@@ -54,6 +54,8 @@
 - convert a text cell to code / to text ctrl M  Y / ctrl M M
 - run current cell 'ctrl + enter'
 - delete a cell ctrl+m d
+- select all same occurences in the cell -> `Ctrl Shit L`
+
 
 </details>
 
